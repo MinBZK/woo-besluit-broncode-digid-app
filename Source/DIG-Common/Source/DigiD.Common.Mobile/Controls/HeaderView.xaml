@@ -1,0 +1,92 @@
+<!-- De openbaarmaking van dit bestand is in het kader van de WOO geschied en  -->
+<!-- dus gericht op transparantie en niet op hergebruik. In het geval dat dit  -->
+<!-- bestand hergebruikt wordt, is de EUPL licentie van toepassing, met  -->
+<!-- uitzondering van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-verzoek-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit WOO-verzoek kunt u mailen met: -->
+<!--   mailto://open@logius.nl -->
+<!-- -->
+<ContentView
+    x:Class="DigiD.Common.Mobile.Controls.HeaderView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:common="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:markup="clr-namespace:DigiD.Common.Markup;assembly=DigiD.Common"
+    xmlns:markup2="clr-namespace:DigiD.Common.Mobile.Markup;assembly=DigiD.Common.Mobile"
+    x:Name="HeaderViewControl"
+    BackgroundColor="Transparent">
+    <ContentView.Content>
+        <Grid
+            x:Name="grid"
+            ColumnDefinitions="20*,20*,20*,20*,20*"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+
+            <controls:CustomSvgImage
+                x:Name="MenuButtonView"
+                Grid.Column="0"
+                AutomationProperties.IsInAccessibleTree="True"  
+                AutomationProperties.Name="{x:Static common:AppResources.AccessibilityAppMainMenu}"
+                BackgroundColor="Transparent"
+                HeightRequest="40"
+                HorizontalOptions="Start"
+                IsVisible="{Binding Source={x:Reference HeaderViewControl}, Path=ShowMenu}"
+                WidthRequest="40">
+                <controls:CustomSvgImage.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
+                </controls:CustomSvgImage.GestureRecognizers>
+            </controls:CustomSvgImage>
+
+            <controls:CustomFontLabel
+                x:Name="demoUser1"
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                IsVisible="{markup:BooleanOrientation Landscape={markup2:BooleanDemoUser Off=False,
+                                                                                         On=True},
+                                                      Portrait=False}"
+                Style="{StaticResource DemoBarLabel}" />
+
+            <controls:CustomSvgImage
+                x:Name="Logo"
+                Grid.Column="2"
+                AutomationProperties.IsInAccessibleTree="True"
+                AutomationProperties.Name="DigiD Logo"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                Source="resource://DigiD.Common.Resources.afbeelding_digid_officiele_app.svg?assembly=DigiD.Common"
+                WidthRequest="40" />
+
+            <controls:CustomFontLabel
+                x:Name="demoUser2"
+                Grid.Column="3"
+                HorizontalOptions="Center"
+                IsVisible="{markup:BooleanOrientation Landscape={markup2:BooleanDemoUser Off=False,
+                                                                                         On=True},
+                                                      Portrait=False}"
+                Style="{StaticResource DemoBarLabel}" />
+
+            <Label
+                x:Name="LogoutButton"
+                Grid.Column="3"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="End"
+                IsVisible="False"
+                Style="{StaticResource LabelAsLinkStyle}"
+                Text="{x:Static common:AppResources.LogoutButton}"
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="LogoutButton_OnTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

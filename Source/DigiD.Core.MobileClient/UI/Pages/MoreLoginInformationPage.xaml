@@ -1,0 +1,91 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<baseClasses:BaseContentPage
+    x:Class="DigiD.UI.Pages.MoreLoginInformationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:baseClasses="clr-namespace:DigiD.Common.Mobile.BaseClasses;assembly=DigiD.Common.Mobile"
+    xmlns:common="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:controlTemplates="clr-namespace:DigiD.Common.Mobile.ControlTemplates;assembly=DigiD.Common.Mobile"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:effects="clr-namespace:DigiD.Common.Effects;assembly=DigiD.Common"
+    xmlns:viewModels="clr-namespace:DigiD.ViewModels;assembly=DigiD"
+    x:DataType="viewModels:MoreLoginInformationViewModel"
+    ShowMenu="False">
+    <ContentView ControlTemplate="{x:Static controlTemplates:TemplateSelector.CurrentTemplate}">
+        <StackLayout Spacing="10">
+            <ScrollView Padding="20,0,20,20" VerticalOptions="FillAndExpand">
+                <StackLayout
+                    x:Name="container"
+                    Spacing="0"
+                    VerticalOptions="FillAndExpand">
+                    <controls:CustomFontLabel
+                        Padding="0,20,0,0"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        Style="{StaticResource LabelHeader}"
+                        Text="{Binding HeaderText}" />
+
+                    <controls:CustomFontLabel Style="{StaticResource LabelRegular}" Text="{x:Static common:AppResources.MoreLoginInformationMessage1}" />
+                    <controls:CustomFontLabel
+                        Margin="0,20,0,0"
+                        Style="{StaticResource LabelBold}"
+                        Text="{x:Static common:AppResources.MoreLoginInformationMessage2}" />
+                    <controls:CustomFontLabel Style="{StaticResource LabelRegular}" Text="{x:Static common:AppResources.MoreLoginInformationMessage3}" />
+                    <controls:CustomFontLabel
+                        Margin="0,20,0,0"
+                        Style="{StaticResource LabelBold}"
+                        Text="{x:Static common:AppResources.MoreLoginInformationMessage4}" />
+                    <controls:CustomFontLabel Style="{StaticResource LabelRegular}" Text="{x:Static common:AppResources.MoreLoginInformationMessage5}" />
+
+                    <controls:ExternalLinkLabel LinkText="{x:Static common:AppResources.MoreLoginInformationMessage6}" Uri="{x:Static common:AppResources.MoreLoginInformationMessageLink}" />
+
+                    <Image
+                        effects:A11YEffect.ControlType="Button"
+                        AutomationProperties.HelpText="Open video in browser"
+                        HorizontalOptions="Center"
+                        Source="foto_uitleg_over_inloggen.png"
+                        VerticalOptions="StartAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GotoVideo}" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+            </ScrollView>
+            <controls:BorderedButton
+                Margin="20,0,20,20"
+                Command="{Binding ButtonCommand}"
+                Text="{x:Static common:AppResources.Close}"
+                VerticalOptions="End" />
+        </StackLayout>
+    </ContentView>
+</baseClasses:BaseContentPage>

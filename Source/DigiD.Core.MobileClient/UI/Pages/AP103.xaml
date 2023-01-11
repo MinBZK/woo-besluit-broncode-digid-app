@@ -1,0 +1,91 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<baseClasses:BaseContentPage
+    x:Class="DigiD.UI.Pages.AP103"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:baseClasses="clr-namespace:DigiD.Common.Mobile.BaseClasses;assembly=DigiD.Common.Mobile"
+    xmlns:controlTemplates="clr-namespace:DigiD.Common.Mobile.ControlTemplates;assembly=DigiD.Common.Mobile"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:resource="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:viewModels="clr-namespace:DigiD.Common.RDA.ViewModels;assembly=DigiD.Common.RDA"
+    x:DataType="viewModels:AP103ViewModel">
+    <ContentView AutomationProperties.IsInAccessibleTree="False" ControlTemplate="{x:Static controlTemplates:TemplateSelector.CurrentTemplate}">
+        <Grid RowDefinitions="*, Auto" RowSpacing="10">
+            <ScrollView Padding="20,0,20,20">
+                <StackLayout
+                    AutomationProperties.IsInAccessibleTree="{OnPlatform Android=False}"
+                    BackgroundColor="{DynamicResource PageBackgroundColor}"
+                    Spacing="20"
+                    VerticalOptions="Fill">
+
+                    <controls:CustomFontLabel
+                        Padding="0,20,0,0"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        Style="{StaticResource LabelHeader}"
+                        Text="{x:Static resource:AppResources.AP103_Header}" />
+
+                    <controls:CustomFontLabel
+                        Margin="0,0,0,30"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        Style="{StaticResource LabelRegular}"
+                        Text="{x:Static resource:AppResources.AP103_Message}"
+                        VerticalOptions="StartAndExpand" />
+
+
+                </StackLayout>
+            </ScrollView>
+            <Grid
+                Grid.Row="1"
+                Margin="20,0,20,20"
+                Padding="0"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="20"
+                VerticalOptions="EndAndExpand">
+                <controls:BorderedButton
+                    Grid.Column="0"
+                    Command="{Binding BackCommand}"
+                    Style="{StaticResource ButtonWithVisualState}"
+                    Text="{x:Static resource:AppResources.AP103_Button1}"
+                    VerticalOptions="End" />
+
+                <controls:BorderedButton
+                    Grid.Column="1"
+                    ButtonType="Secundairy"
+                    Command="{Binding ButtonCommand}"
+                    Style="{StaticResource ButtonWithVisualState}"
+                    Text="{x:Static resource:AppResources.AP103_Button2}"
+                    VerticalOptions="End" />
+            </Grid>
+        </Grid>
+    </ContentView>
+</baseClasses:BaseContentPage>

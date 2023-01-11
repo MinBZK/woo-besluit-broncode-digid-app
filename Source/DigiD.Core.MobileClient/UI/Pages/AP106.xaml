@@ -1,0 +1,121 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<baseClasses:BaseContentPage
+    x:Class="DigiD.UI.Pages.AP106"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:baseClasses="clr-namespace:DigiD.Common.Mobile.BaseClasses;assembly=DigiD.Common.Mobile"
+    xmlns:common="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:controlTemplates="clr-namespace:DigiD.Common.Mobile.ControlTemplates;assembly=DigiD.Common.Mobile"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:effects="clr-namespace:DigiD.Common.Effects;assembly=DigiD.Common"
+    xmlns:models="clr-namespace:DigiD.Models;assembly=DigiD"
+    xmlns:viewModels="clr-namespace:DigiD.ViewModels;assembly=DigiD"
+    xmlns:views="clr-namespace:DigiD.UI.Views;assembly=DigiD"
+    x:DataType="viewModels:AP106ViewModel"
+    ScrollHeaderEnabled="True">
+    <ContentView ControlTemplate="{x:Static controlTemplates:TemplateSelector.CurrentTemplate}">
+        <ScrollView Scrolled="ScrollView_OnScrolled">
+            <StackLayout
+                Margin="0,0,0,20"
+                Padding="0,0,0,20"
+                BackgroundColor="{DynamicResource PageBackgroundColor}"
+                Spacing="0"
+                VerticalOptions="Fill">
+                <controls:CustomFontLabel
+                    Margin="20,0,20,20"
+                    Padding="0,20,0,0"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    Style="{StaticResource LabelHeader}"
+                    Text="{Binding HeaderText}" />
+
+                <StackLayout BindableLayout.ItemsSource="{Binding MenuItems}" Spacing="1">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:MenuItem">
+                            <views:CustomIconListItemView BackgroundColor="{AppThemeBinding Light={StaticResource MenuItemBackgroundColorLight}, Dark={StaticResource MenuItemBackgroundColorDark}}" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+                <StackLayout AutomationProperties.IsInAccessibleTree="{OnPlatform Android=false}" Spacing="20">
+                    <controls:CustomFontLabel
+                        Margin="20,50,20,0"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        Style="{StaticResource LabelHeader}"
+                        Text="{x:Static common:AppResources.AP106_MijnDigiDHeaderText}" />
+
+                    <controls:CustomFontLabel
+                        Margin="20,0,20,-10"
+                        Style="{StaticResource LabelRegular}"
+                        Text="{x:Static common:AppResources.AP106_MijnDigiDLabelText}" />
+
+                    <Grid
+                        effects:A11YEffect.ControlType="Button"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        AutomationProperties.Name="{Binding AccessibilityText}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource MenuItemBackgroundColorLight},
+                                                          Dark={StaticResource MenuItemBackgroundColorDark}}"
+                        ColumnDefinitions="Auto, *, Auto"
+                        ColumnSpacing="10"
+                        RowDefinitions="Auto">
+                        <controls:CustomSvgImage
+                            Grid.Column="0"
+                            Margin="10"
+                            AutomationProperties.IsInAccessibleTree="False"
+                            HeightRequest="34"
+                            Source="{AppThemeBinding Light='resource://DigiD.Resources.digid_icon_menu_mijn_digid.svg',
+                                                     Dark='resource://DigiD.Resources.digid_icon_menu_mijn_digid_dark.svg'}"
+                            WidthRequest="34" />
+                        <controls:CustomFontLabel
+                            Grid.Column="1"
+                            AutomationProperties.IsInAccessibleTree="False"
+                            Style="{StaticResource LabelRegular}"
+                            Text="{Binding MyDigiDTitle}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <controls:CustomSvgImage
+                            Grid.Column="2"
+                            Margin="10,0,16,0"
+                            AutomationProperties.IsInAccessibleTree="False"
+                            HeightRequest="17"
+                            Source="{AppThemeBinding Light='resource://DigiD.Resources.icon_menu_externe_link.svg',
+                                                     Dark='resource://DigiD.Resources.icon_menu_externe_link_dark.svg'}"
+                            WidthRequest="15" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenMyDigiDCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentView>
+</baseClasses:BaseContentPage>

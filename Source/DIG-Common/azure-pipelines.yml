@@ -1,0 +1,66 @@
+# De openbaarmaking van dit bestand is in het kader van de WOO geschied en 
+# dus gericht op transparantie en niet op hergebruik. In het geval dat dit 
+# bestand hergebruikt wordt, is de EUPL licentie van toepassing, met 
+# uitzondering van broncode waarvoor een andere licentie is aangegeven.
+#
+# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+#   https://github.com/MinBZK/woo-verzoek-broncode-digid-app
+#
+# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+# onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App" 
+#
+# Voor overige vragen over dit WOO-verzoek kunt u mailen met:
+#   mailto://open@logius.nl
+#
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/DigiD.Common.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Production'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+    
+
+- task: SonarCloudPrepare@1
+  displayName: 'Initialiseer SonarCloud'
+  inputs:
+    SonarCloud: 'SonarCloud BDMCC'
+    organization: 'bdmcc'
+    scannerMode: 'MSBuild'
+    projectKey: 'DIG-Common'
+    projectName: 'DIG - Common - Logius'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  displayName: 'Publiceer data naar SonarCloud.'
+  inputs:
+    pollingTimeoutSec: '300'

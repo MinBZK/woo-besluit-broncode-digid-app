@@ -1,0 +1,75 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="DigiD.UI.Controls.MenuSwitchControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:controls1="clr-namespace:DigiD.UI.Controls;assembly=DigiD"
+    xmlns:effects="clr-namespace:DigiD.Common.Effects;assembly=DigiD.Common"
+    xmlns:markup="clr-namespace:DigiD.Common.Markup;assembly=DigiD.Common"
+    Padding="10,0"
+    BackgroundColor="{AppThemeBinding Light={StaticResource MenuItemBackgroundColorLight},
+                                      Dark={StaticResource MenuItemBackgroundColorDark}}"
+    ColumnDefinitions="Auto, *, Auto"
+    ColumnSpacing="10"
+    HeightRequest="{markup:DoubleOrientation Landscape={x:Static controls1:MenuSwitchControl.MenuSwitchNormalHeight},
+                                             Portrait={markup:DoubleSFS Normal={x:Static controls1:MenuSwitchControl.MenuSwitchNormalHeight},
+                                                                        ExtraLarge={x:Static controls1:MenuSwitchControl.MenuSwitchExtraLargeHeight}}}"
+    RowDefinitions="*">
+    <controls:CustomSvgImage
+        x:Name="Image"
+        Grid.Column="0"
+        AutomationProperties.IsInAccessibleTree="False"
+        HeightRequest="34"
+        WidthRequest="34" />
+
+    <controls:CustomFontLabel
+        x:Name="Label"
+        Grid.Column="1"
+        AutomationProperties.IsInAccessibleTree="False"
+        HorizontalOptions="StartAndExpand"
+        MaxLines="2"
+        Style="{StaticResource LabelRegular}"
+        VerticalOptions="FillAndExpand"
+        VerticalTextAlignment="Center" />
+
+    <Switch
+        x:Name="ToggleSwitch"
+        Grid.Column="2"
+        effects:A11YEffect.ControlType="Toggle"
+        AutomationProperties.IsInAccessibleTree="True"
+        AutomationProperties.LabeledBy="{x:Reference Label}"
+        HorizontalOptions="End"
+        Toggled="ToggleSwitch_OnToggled"
+        VerticalOptions="Center" />
+</Grid>

@@ -1,0 +1,88 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<StackLayout
+    x:Class="DigiD.UI.Controls.MenuView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:common="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:models="clr-namespace:DigiD.Models;assembly=DigiD"
+    xmlns:views="clr-namespace:DigiD.UI.Views;assembly=DigiD"
+    BackgroundColor="{AppThemeBinding Dark='#2A2B31',
+                                      Light='#FFFFFF'}"
+    VerticalOptions="FillAndExpand">
+    <Grid HeightRequest="96">
+        <controls:CustomSvgImage
+            x:Name="DefaultElement"
+            AutomationProperties.IsInAccessibleTree="True"
+            AutomationProperties.Name="DigiD logo"
+            HeightRequest="40"
+            HorizontalOptions="Center"
+            Source="resource://DigiD.Common.Resources.afbeelding_digid_officiele_app.svg?assembly=DigiD.Common"
+            WidthRequest="40" />
+
+        <ImageButton
+            Margin="0,0,12,0"
+            Padding="12"
+            AutomationProperties.IsInAccessibleTree="True"
+            AutomationProperties.Name="{x:Static common:AppResources.MenuClose}"
+            BackgroundColor="Transparent"
+            Clicked="Button_Clicked"
+            HeightRequest="48"
+            HorizontalOptions="EndAndExpand"
+            Source="{AppThemeBinding Light='icon_sluiten.png',
+                                     Dark='icon_sluiten_dark.png'}"
+            WidthRequest="48" />
+    </Grid>
+
+    <ScrollView
+        Margin="0,0,0,20"
+        VerticalOptions="FillAndExpand"
+        VerticalScrollBarVisibility="Never">
+        <StackLayout
+            Padding="0,1,0,1"
+            BackgroundColor="{AppThemeBinding Dark='#000000',
+                                              Light='#F3F3F3'}"
+            BindableLayout.ItemsSource="{Binding MenuItems}"
+            Spacing="1"
+            VerticalOptions="StartAndExpand">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="models:MenuItem">
+                    <views:CustomIconListItemView BackgroundColor="{AppThemeBinding Dark='#2A2B31', Light='#FFFFFF'}" />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </ScrollView>
+    <StackLayout.GestureRecognizers>
+        <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGestureRecognizer_OnSwiped" />
+    </StackLayout.GestureRecognizers>
+</StackLayout>

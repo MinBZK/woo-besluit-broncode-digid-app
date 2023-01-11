@@ -1,0 +1,199 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<baseClasses:BaseContentPage
+    x:Class="DigiD.UI.Pages.AP079"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:baseClasses="clr-namespace:DigiD.Common.Mobile.BaseClasses;assembly=DigiD.Common.Mobile"
+    xmlns:behavior="clr-namespace:DigiD.Behaviors"
+    xmlns:controlTemplates="clr-namespace:DigiD.Common.Mobile.ControlTemplates;assembly=DigiD.Common.Mobile"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:effects="clr-namespace:DigiD.Common.Effects;assembly=DigiD.Common"
+    xmlns:markup="clr-namespace:DigiD.Common.Markup;assembly=DigiD.Common"
+    xmlns:resources="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:viewModels="clr-namespace:DigiD.ViewModels;assembly=DigiD"
+    x:Name="AP079Page"
+    x:DataType="viewModels:AP079ViewModel">
+    <ContentView ControlTemplate="{x:Static controlTemplates:TemplateSelector.CurrentTemplate}">
+        <Grid
+            x:Name="mainGrid"
+            RowDefinitions="*, Auto"
+            RowSpacing="10">
+
+            <ScrollView
+                Grid.Row="0"
+                Padding="20,0,20,20"
+                HorizontalOptions="StartAndExpand"
+                Orientation="Vertical"
+                VerticalOptions="Fill">
+                <StackLayout
+                    AutomationProperties.IsInAccessibleTree="{OnPlatform iOS=False}"
+                    HorizontalOptions="Start"
+                    Scale="{Binding Source={x:Reference AP079Page}, Path=ScrollScale}"
+                    Spacing="20"
+                    VerticalOptions="FillAndExpand">
+                    <controls:CustomFontLabel
+                        Padding="0,20,0,0"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        Style="{StaticResource LabelHeader}"
+                        Text="{x:Static resources:AppResources.AP079_Header}" />
+
+                    <controls:CustomErrorLabel
+                        effects:A11YEffect.ControlType="LiveUpdate"
+                        ErrorText="{x:Static resources:AppResources.AP079_ErrorBRP}"
+                        IsVisible="{Binding IsValidBrpCheck, Converter={StaticResource BooleanInvertConverter}}" />
+
+                    <!--  Burgerservicenummer  -->
+                    <controls:CustomEntryField
+                        x:Name="txt_bsn"
+                        AutomationId="Bsn"
+                        Completed="txt_Completed"
+                        ErrorText="{x:Static resources:AppResources.AP079_ErrorBsn}"
+                        HelperText="{x:Static resources:AppResources.AP079_Bsn_example}"
+                        HorizontalOptions="FillAndExpand"
+                        IsRequired="True"
+                        IsValid="{Binding IsValidBsn}"
+                        Keyboard="Numeric"
+                        LabelText="{x:Static resources:AppResources.AP079_Bsn}"
+                        MakePlaceholderInvisible="True"
+                        MaxLength="9"
+                        MinLength="9"
+                        ReturnType="Next"
+                        Text="{Binding Bsn}"
+                        ToolTip="{x:Static resources:AppResources.AP079_BsnTooltip}"
+                        ValidateCommand="{Binding ValidateCommand}"
+                        ValidateCommandArguments="Bsn" />
+
+                    <!--  Geboortedatum  -->
+                    <controls:CustomEntryField
+                        x:Name="txt_dob"
+                        AutomationId="DateOfBirth"
+                        Completed="txt_Completed"
+                        ErrorText="{x:Static resources:AppResources.AP079_ErrorDOB}"
+                        HideCharCounter="True"
+                        HorizontalOptions="FillAndExpand"
+                        IsRequired="True"
+                        IsValid="{Binding IsValidDob}"
+                        Keyboard="Numeric"
+                        LabelText="{x:Static resources:AppResources.AP079_DOB}"
+                        MaxLength="10"
+                        MinLength="10"
+                        Placeholder="{x:Static resources:AppResources.AP079_DOB_Placeholder}"
+                        ReturnType="Next"
+                        Text="{Binding DateOfBirth}"
+                        ToolTip="{x:Static resources:AppResources.AP079_DOBTooltip}"
+                        ValidateCommand="{Binding ValidateCommand}"
+                        ValidateCommandArguments="DateOfBirth"
+                        WidthRequest="275">
+                        <controls:CustomEntryField.Behaviors>
+                            <behavior:DateEntryBehavior />
+                        </controls:CustomEntryField.Behaviors>
+                    </controls:CustomEntryField>
+
+                    <!--  Postcode  -->
+                    <controls:CustomEntryField
+                        x:Name="txt_zipcode"
+                        AutoUpperCase="True"
+                        AutomationId="Postalcode"
+                        AutomationProperties.Name="{Binding Postalcode, Converter={StaticResource SpeakLetterForLetterConverter}}"
+                        Completed="txt_Completed"
+                        ErrorText="{x:Static resources:AppResources.AP079_ErrorPostalcode}"
+                        HideCharCounter="True"
+                        IsRequired="True"
+                        IsValid="{Binding IsValidPostalcode}"
+                        Keyboard="Text"
+                        LabelText="{x:Static resources:AppResources.AP079_Postalcode}"
+                        MakePlaceholderInvisible="True"
+                        MaxLength="6"
+                        MinLength="6"
+                        ReturnType="Next"
+                        Text="{Binding Postalcode}"
+                        ToolTip="{x:Static resources:AppResources.AP079_PostalcodeTooltip}"
+                        ValidateCommand="{Binding ValidateCommand}"
+                        ValidateCommandArguments="Postalcode"
+                        WidthRequest="205" />
+
+                    <!--  Huisnummer en toevoeging  -->
+                    <StackLayout
+                        x:Name="housenumberContainer"
+                        Orientation="{markup:StackOrientation Landscape=Horizontal,
+                                                              Portrait={markup:StackLayoutOrientationSFS Normal=Horizontal,
+                                                                                                         Large=Horizontal,
+                                                                                                         ExtraLarge=Vertical}}"
+                        Spacing="{markup:DoubleOrientation Landscape=5,
+                                                           Portrait={markup:DoubleSFS Normal=5,
+                                                                                      ExtraLarge=0}}">
+                        <controls:CustomEntryField
+                            x:Name="txt_housenumber"
+                            AutomationId="HouseNumber"
+                            Completed="txt_Completed"
+                            ErrorText="{x:Static resources:AppResources.AP079_ErrorHouseNumber}"
+                            HideCharCounter="True"
+                            IsRequired="True"
+                            IsValid="{Binding IsValidHouseNumber}"
+                            Keyboard="Numeric"
+                            LabelText="{x:Static resources:AppResources.AP079_HouseNumber}"
+                            MakePlaceholderInvisible="True"
+                            MaxLength="5"
+                            Text="{Binding HouseNumber}"
+                            ValidateCommand="{Binding ValidateCommand}"
+                            ValidateCommandArguments="HouseNumber"
+                            WidthRequest="{markup:DoubleOrientation Landscape={markup:DoubleSFS Normal=135,
+                                                                                                ExtraLarge=250},
+                                                                    Portrait={markup:DoubleSFS Normal=135,
+                                                                                               ExtraLarge=200}}" />
+                        <controls:CustomEntryField
+                            x:Name="txt_housenumber_extra"
+                            AutomationProperties.Name="{x:Static resources:AppResources.AP079_HouseNumber}"
+                            HideCharCounter="True"
+                            IsRequired="False"
+                            LabelText="{x:Static resources:AppResources.AP079_HouseNumberSuffix}"
+                            MakePlaceholderInvisible="True"
+                            MaxLength="4"
+                            Text="{Binding HouseNumberSuffix}"
+                            WidthRequest="{markup:DoubleSFS Normal=110,
+                                                            ExtraLarge=180}" />
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
+            <controls:BorderedButton
+                x:Name="nextButton"
+                Grid.Row="1"
+                Margin="20,0,20,20"
+                Clicked="NextButton_Clicked"
+                HorizontalOptions="FillAndExpand"
+                IsEnabled="{Binding IsNextButtonEnabled}"
+                Text="{x:Static resources:AppResources.Next}" />
+        </Grid>
+    </ContentView>
+</baseClasses:BaseContentPage>

@@ -1,0 +1,531 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>DigiD</AssemblyName>
+    <RootNamespace>DigiD</RootNamespace>
+    <Configurations>Debug;Test;Acceptance;PreProd;Production;TestCloud;Acceptance-SecurityTest;Develop</Configurations>
+    <Platforms>AnyCPU;iPhone</Platforms>
+	<LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU' or '$(Configuration)|$(Platform)'=='Debug|iPhone'">
+    <DefineConstants>TRACE;DEBUG;ENVIRONMENT_SELECTABLE;NETSTANDARD2_0;NETSTANDARD;NETSTANDARD2_1</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Acceptance|AnyCPU' or '$(Configuration)|$(Platform)'=='Acceptance|iPhone'">
+    <DefineConstants>TRACE;ENVIRONMENT_SELECTABLE;ACCEPTANCE;ACC;NETSTANDARD2_0;NETSTANDARD;NETSTANDARD2_1</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Production|AnyCPU' or '$(Configuration)|$(Platform)'=='Production|iPhone'">
+    <DefineConstants>TRACE;PROD;NETSTANDARD2_0;NETSTANDARD;NETSTANDARD2_1</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='PreProd|AnyCPU' or '$(Configuration)|$(Platform)'=='PreProd|iPhone'">
+    <DefineConstants>TRACE;PREPROD;NETSTANDARD2_0;NETSTANDARD;NETSTANDARD2_1</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU' or '$(Configuration)|$(Platform)'=='Test|iPhone'">
+    <DefineConstants>TRACE;ENVIRONMENT_SELECTABLE;TEST;NETSTANDARD2_0;NETSTANDARD;NETSTANDARD2_1</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop|AnyCPU' or '$(Configuration)|$(Platform)'=='Develop|iPhone'">
+    <DefineConstants>TRACE;ENVIRONMENT_SELECTABLE;DEV;NETSTANDARD2_0;NETSTANDARD;NETSTANDARD2_1</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	<DefineConstants>TRACE;ENVIRONMENT_SELECTABLE;NETSTANDARD2_0;DEBUG;NETSTANDARD;NETSTANDARD2_1;</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+    <Optimize>true</Optimize>
+	<DefineConstants>TRACE;ENVIRONMENT_SELECTABLE;TEST;NETSTANDARD2_0;NETSTANDARD;NETSTANDARD2_1</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Acceptance|AnyCPU'">
+	<DefineConstants>TRACE;ENVIRONMENT_SELECTABLE;NETSTANDARD2_0;ACC;ACCEPTANCE;NETSTANDARD;NETSTANDARD2_1;</DefineConstants>
+	<DebugType></DebugType>
+	<Optimize>true</Optimize>
+	<LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Acceptance-SecurityTest|AnyCPU' or '$(Configuration)|$(Platform)'=='Acceptance-SecurityTest|iPhone'">
+    <DefineConstants>TRACE;ENVIRONMENT_SELECTABLE;NETSTANDARD2_0;ACC;ACCEPTANCE;NETSTANDARD;NETSTANDARD2_1;SSL_UNPINNING</DefineConstants>
+    <DebugType />
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='PreProd|AnyCPU'">
+	<DefineConstants>TRACE;PREPROD;NETSTANDARD2_0;NETSTANDARD;NETSTANDARD2_1</DefineConstants>
+	<Optimize>true</Optimize>
+	<LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Production|AnyCPU'">
+	<DefineConstants>TRACE;PROD;NETSTANDARD2_0;NETSTANDARD;NETSTANDARD2_1</DefineConstants>
+    <Optimize>true</Optimize>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PreProd|iPhone' ">
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Production|iPhone' ">
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|iPhone' ">
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Acceptance|iPhone' ">
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TestCloud|AnyCPU' ">
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TestCloud|iPhone' ">
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Acceptance-SecurityTest|AnyCPU' ">
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Acceptance-SecurityTest|iPhone' ">
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Develop|iPhone' ">
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" PrivateAssets="All" />
+    <PackageReference Include="QRCoder" Version="1.4.3" />
+    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="20.2.0.45" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.4" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
+    <PackageReference Include="Xamarin.Forms.DebugRainbows" Version="1.1.4" />
+    <PackageReference Include="Xam.Plugin.HtmlLabel" Version="5.1.0" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="App.xaml" />
+    <None Remove="Resources\digid_afbeelding_digid_app_zonder_handjes.svg" />
+    <None Remove="Resources\digid_afbeelding_iddocument_achter_phone_eng.svg" />
+    <None Remove="Resources\digid_afbeelding_iddocument_achter_phone_nl.svg" />
+    <None Remove="Resources\digid_icon_contact_contactformulier.svg" />
+    <None Remove="Resources\digid_icon_melding_attentie.svg" />
+    <None Remove="Resources\digid_icon_menu.svg" />
+    <None Remove="Resources\digid_icon_menu_2fa.svg" />
+    <None Remove="Resources\digid_icon_menu_2fa_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_berichten_rectangle.svg" />
+    <None Remove="Resources\digid_icon_menu_berichten_rectangle_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_nieuwe_bericht.svg" />
+    <None Remove="Resources\digid_icon_menu_nieuwe_bericht_dark.svg" />
+    <None Remove="Resources\Fonts\FontAwesomeRegular.otf" />
+    <None Remove="Resources\Fonts\FontAwesomeSolid.otf" />
+    <None Remove="Resources\Fonts\OCR-B.otf" />
+    <None Remove="Themes\DarkTheme.xaml" />
+    <None Remove="Themes\LightTheme.xaml" />
+    <None Remove="Resources\Fonts\RijksoverheidSansWebText-Bold.ttf" />
+    <None Remove="Resources\Fonts\RijksoverheidSansWebText-Italic.ttf" />
+    <None Remove="Resources\Fonts\RijksoverheidSansWebText-Regular.ttf" />
+    <None Remove="Resources\afbeelding_aanzetten_camera.svg" />
+    <None Remove="Resources\afbeelding_activeringscode_brief.svg" />
+    <None Remove="Resources\afbeelding_email_controle_vraag.svg" />
+    <None Remove="Resources\afbeelding_email_deactiveren.svg" />
+    <None Remove="Resources\afbeelding_email_toevoegen.svg" />
+    <None Remove="Resources\afbeelding_email_wijzigen.svg" />
+    <None Remove="Resources\afbeelding_rijbewijs_op_cardreader.svg" />
+    <None Remove="Resources\afbeelding_schermswitch_digid_naar_idchecker.svg" />
+    <None Remove="Resources\afbeelding_sms_activeren.svg" />
+    <None Remove="Resources\afbeelding_wachten_op_brief.svg" />
+    <None Remove="Resources\afbeelding_wijzigen_telefoon.svg" />
+    <None Remove="Resources\afbeelding_wijzigen_wachtwoord.svg" />
+    <None Remove="Resources\digid_afbeelding_activeer_andere_app_telefoon_of_tablet.svg" />
+    <None Remove="Resources\digid_afbeelding_activeer_andere_digid_app.svg" />
+    <None Remove="Resources\digid_afbeelding_activeer_kijk_op_de_andere_app.svg" />
+    <None Remove="Resources\digid_afbeelding_brief_herinnering.svg" />
+    <None Remove="Resources\digid_afbeelding_digid_app_deactiveren.svg" />
+    <None Remove="Resources\digid_afbeelding_document_controle.svg" />
+    <None Remove="Resources\digid_afbeelding_document_idcheck_al_uitgevoerd.svg" />
+    <None Remove="Resources\digid_afbeelding_geldig_NL_pp_of_idkaart.svg" />
+    <None Remove="Resources\digid_afbeelding_idcheck_bevestigen.svg" />
+    <None Remove="Resources\digid_afbeelding_idcheck_uitstellen.svg" />
+    <None Remove="Resources\digid_afbeelding_kijk_op_de_andere_app.svg" />
+    <None Remove="Resources\digid_afbeelding_opheffen_digid_account.svg" />
+    <None Remove="Resources\digid_afbeelding_small_pincode_wijzigen_app.svg" />
+    <None Remove="Resources\digid_afbeelding_small_pincode_wijzigen_IDbewijs.svg" />
+    <None Remove="Resources\digid_afbeelding_whatsnew_account_aanvragen.svg" />
+    <None Remove="Resources\digid_afbeelding_whatsnew_inloggen_met_idkaart_ENG.svg" />
+    <None Remove="Resources\digid_afbeelding_whatsnew_inloggen_met_idkaart_NL.svg" />
+    <None Remove="Resources\digid_afbeelding_whatsnew_qrreader_improved.svg" />
+    <None Remove="Resources\digid_icon_contact_telefoon.svg" />
+    <None Remove="Resources\digid_icon_contact_twitter.svg" />
+    <None Remove="Resources\digid_icon_document_check_alert.svg" />
+    <None Remove="Resources\digid_icon_document_check_alert_dark.svg" />
+    <None Remove="Resources\digid_icon_document_check_ok.svg" />
+    <None Remove="Resources\digid_icon_document_check_ok_dark.svg" />
+    <None Remove="Resources\digid_icon_have_not_read.svg" />
+    <None Remove="Resources\digid_icon_have_read.svg" />
+    <None Remove="Resources\digid_icon_menu_app_deactiveren.svg" />
+    <None Remove="Resources\digid_icon_menu_app_deactiveren_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_app_gebruiksgeschiedenis.svg" />
+    <None Remove="Resources\digid_icon_menu_app_gebruiksgeschiedenis_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_balie.svg" />
+    <None Remove="Resources\digid_icon_menu_balie_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_berichten.svg" />
+    <None Remove="Resources\digid_icon_menu_berichten_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_berichten_nieuwe_bericht.svg" />
+    <None Remove="Resources\digid_icon_menu_berichten_nieuwe_bericht_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_chevron_interne_link.svg" />
+    <None Remove="Resources\digid_icon_menu_chevron_interne_link_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_contact.svg" />
+    <None Remove="Resources\digid_icon_menu_contact_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_email.svg" />
+    <None Remove="Resources\digid_icon_menu_email_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_mijn_digid.svg" />
+    <None Remove="Resources\digid_icon_menu_mijn_digid_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_rate.svg" />
+    <None Remove="Resources\digid_icon_menu_rate_dark.svg" />
+    <None Remove="Resources\digid_icon_overlay_afnemer.svg" />
+    <None Remove="Resources\digid_icon_overlay_afnemer_dark.svg" />
+    <None Remove="Resources\digid_icon_pincode_veranderen.svg" />
+    <None Remove="Resources\digid_icon_pincode_veranderen_dark.svg" />
+    <None Remove="Resources\digid_icon_radiobutton_app_off.svg" />
+    <None Remove="Resources\digid_icon_radiobutton_app_off_dark.svg" />
+    <None Remove="Resources\digid_icon_radiobutton_app_on.svg" />
+    <None Remove="Resources\digid_icon_servicezuil_dark.svg" />
+    <None Remove="Resources\icon_foutmelding_kritiek.svg" />
+    <None Remove="Resources\icon_header_menu_dark.svg" />
+    <None Remove="Resources\icon_header_sluiten_dark.svg" />
+    <None Remove="Resources\icon_header_terug_dark.svg" />
+    <None Remove="Resources\icon_instellingen_switch_taal_dark.svg" />
+    <None Remove="Resources\icon_instellingen_switch_theme.svg" />
+    <None Remove="Resources\icon_instellingen_switch_theme_dark.svg" />
+    <None Remove="Resources\icon_menu_app_vernieuwen.svg" />
+    <None Remove="Resources\icon_menu_app_vernieuwen_dark.svg" />
+    <None Remove="Resources\icon_menu_externe_link.svg" />
+    <None Remove="Resources\icon_menu_externe_link_dark.svg" />
+    <None Remove="Resources\icon_menu_faq.svg" />
+    <None Remove="Resources\icon_menu_faq_dark.svg" />
+    <None Remove="Resources\icon_menu_info_over_de_app.svg" />
+    <None Remove="Resources\icon_menu_info_over_de_app_dark.svg" />
+    <None Remove="Resources\icon_menu_instellingen.svg" />
+    <None Remove="Resources\icon_menu_instellingen_dark.svg" />
+    <None Remove="Resources\icon_menu_verhogen.svg" />
+    <None Remove="Resources\icon_menu_verzamelen_statistieken.svg" />
+    <None Remove="Resources\icon_menu_verzamelen_statistieken_dark.svg" />
+    <None Remove="Resources\icon_qr_hoek.svg" />
+    <None Remove="Resources\icon_radiobutton_selected.svg" />
+    <None Remove="Resources\icon_radiobutton_unselected.svg" />
+    <None Remove="Resources\opensource-packages.json" />
+    <None Remove="Resources\WhatsNew.json" />
+    <None Remove="Themes\DarkTheme.xaml" />
+    <None Remove="Themes\LightTheme.xaml" />
+    <None Remove="Resources\Fonts\RijksoverheidSansWebText-Bold.ttf" />
+    <None Remove="Resources\Fonts\RijksoverheidSansWebText-Italic.ttf" />
+    <None Remove="Resources\Fonts\RijksoverheidSansWebText-Regular.ttf" />
+    <None Remove="Resources\digid_icon_menu_ondersteuning_dark.svg" />
+    <None Remove="Resources\digid_icon_menu_ondersteuning.svg" />
+    <None Remove="Xam.Plugin.HtmlLabel" />
+    <None Remove="Behaviors\" />
+    <None Remove="Resources\digid_afbeelding_landing_wachten_op_brief.svg" />
+    <None Remove="Resources\digid_afbeelding_landing_activeer_de_app.svg" />
+    <None Remove="Resources\digid_afbeelding_landing_app_is_geactiveerd.svg" />
+    <None Remove="Resources\digid_icon_nummering_new_01_dark.svg" />
+    <None Remove="Resources\digid_icon_nummering_new_01.svg" />
+    <None Remove="Resources\digid_icon_nummering_new_02_dark.svg" />
+    <None Remove="Resources\digid_icon_nummering_new_02.svg" />
+    <None Remove="Resources\digid_icon_nummering_new_03_dark.svg" />
+    <None Remove="Resources\digid_icon_nummering_new_03.svg" />
+    <None Remove="Resources\digid_afbeelding_notificatie.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="UI\Pages\MainPage.xaml" />
+    <EmbeddedResource Remove="UI\Views\PincodeEntryView.xaml" />
+    <EmbeddedResource Remove="UI\Views\ActivationCodeEntryView.xaml" />
+    <EmbeddedResource Remove="UI\Views\ActivationCodeEntryView.xaml" />
+    <EmbeddedResource Remove="UI\Views\PENCodeEntryView.xaml" />
+    <EmbeddedResource Remove="UI\Views\SMSEntryView.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\digid_afbeelding_digid_app_zonder_handjes.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_iddocument_achter_phone_eng.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_iddocument_achter_phone_nl.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_contact_contactformulier.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_melding_attentie.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_2fa.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_2fa_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_berichten_rectangle.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_berichten_rectangle_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_nieuwe_bericht.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_nieuwe_bericht_dark.svg" />
+    <EmbeddedResource Include="Resources\Fonts\FontAwesomeRegular.otf" />
+    <EmbeddedResource Include="Resources\Fonts\FontAwesomeSolid.otf" />
+    <EmbeddedResource Include="Resources\Fonts\RijksoverheidSansWebText-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\RijksoverheidSansWebText-Italic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\RijksoverheidSansWebText-Regular.ttf" />
+    <EmbeddedResource Include="Resources\afbeelding_aanzetten_camera.svg" />
+    <EmbeddedResource Include="Resources\afbeelding_activeringscode_brief.svg" />
+    <EmbeddedResource Include="Resources\afbeelding_email_controle_vraag.svg" />
+    <EmbeddedResource Include="Resources\afbeelding_email_deactiveren.svg" />
+    <EmbeddedResource Include="Resources\afbeelding_email_toevoegen.svg" />
+    <EmbeddedResource Include="Resources\afbeelding_email_wijzigen.svg" />
+    <EmbeddedResource Include="Resources\afbeelding_schermswitch_digid_naar_idchecker.svg" />
+    <EmbeddedResource Include="Resources\afbeelding_sms_activeren.svg" />
+    <EmbeddedResource Include="Resources\afbeelding_wachten_op_brief.svg" />
+    <EmbeddedResource Include="Resources\afbeelding_wijzigen_telefoon.svg" />
+    <EmbeddedResource Include="Resources\afbeelding_wijzigen_wachtwoord.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_activeer_andere_app_telefoon_of_tablet.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_activeer_andere_digid_app.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_activeer_kijk_op_de_andere_app.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_brief_herinnering.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_digid_app_deactiveren.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_document_controle.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_document_idcheck_al_uitgevoerd.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_geldig_NL_pp_of_idkaart.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_idcheck_bevestigen.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_idcheck_uitstellen.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_opheffen_digid_account.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_small_pincode_wijzigen_app.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_small_pincode_wijzigen_IDbewijs.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_contact_telefoon.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_contact_twitter.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_document_check_alert.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_document_check_alert_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_document_check_ok.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_document_check_ok_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_have_not_read.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_have_read.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_app_deactiveren.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_app_deactiveren_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_app_gebruiksgeschiedenis.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_app_gebruiksgeschiedenis_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_balie.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_balie_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_berichten.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_berichten_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_berichten_nieuwe_bericht.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_berichten_nieuwe_bericht_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_chevron_interne_link.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_chevron_interne_link_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_contact.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_contact_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_email.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_email_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_mijn_digid.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_mijn_digid_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_rate.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_rate_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_overlay_afnemer.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_overlay_afnemer_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_pincode_veranderen.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_pincode_veranderen_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_radiobutton_app_off.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_radiobutton_app_off_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_radiobutton_app_on.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_servicezuil_dark.svg" />
+    <EmbeddedResource Include="Resources\icon_foutmelding_kritiek.svg" />
+    <EmbeddedResource Include="Resources\icon_header_menu_dark.svg" />
+    <EmbeddedResource Include="Resources\icon_header_sluiten_dark.svg" />
+    <EmbeddedResource Include="Resources\icon_header_terug_dark.svg" />
+    <EmbeddedResource Include="Resources\icon_instellingen_switch_theme.svg" />
+    <EmbeddedResource Include="Resources\icon_instellingen_switch_theme_dark.svg" />
+    <EmbeddedResource Include="Resources\icon_menu_app_vernieuwen_dark.svg" />
+    <EmbeddedResource Include="Resources\icon_menu_externe_link.svg" />
+    <EmbeddedResource Include="Resources\icon_menu_externe_link_dark.svg" />
+    <EmbeddedResource Include="Resources\icon_menu_faq.svg" />
+    <EmbeddedResource Include="Resources\icon_menu_faq_dark.svg" />
+    <EmbeddedResource Include="Resources\icon_menu_info_over_de_app.svg" />
+    <EmbeddedResource Include="Resources\icon_menu_info_over_de_app_dark.svg" />
+    <EmbeddedResource Include="Resources\icon_menu_instellingen.svg" />
+    <EmbeddedResource Include="Resources\icon_menu_instellingen_dark.svg" />
+    <EmbeddedResource Include="Resources\icon_menu_verzamelen_statistieken.svg" />
+    <EmbeddedResource Include="Resources\icon_menu_verzamelen_statistieken_dark.svg" />
+    <EmbeddedResource Include="Resources\icon_qr_hoek.svg" />
+    <EmbeddedResource Include="Resources\opensource-packages.json" />
+    <EmbeddedResource Include="Resources\WhatsNew.json" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_ondersteuning_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_menu_ondersteuning.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_landing_activeer_de_app.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_landing_app_is_geactiveerd.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_nummering_new_01_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_nummering_new_01.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_nummering_new_02_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_nummering_new_02.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_nummering_new_03_dark.svg" />
+    <EmbeddedResource Include="Resources\digid_icon_nummering_new_03.svg" />
+    <EmbeddedResource Include="Resources\digid_afbeelding_notificatie.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DIG-Common\Source\DigiD.Common.Mobile\DigiD.Common.Mobile.csproj" />
+    <ProjectReference Include="..\..\DIG-Common\Source\DigiD.Common.RDA\DigiD.Common.RDA.csproj" />
+    <ProjectReference Include="..\..\DIG-Common\Source\DigiD.Common\DigiD.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="UI\Pages\MainPage.xaml.cs" />
+    <Compile Remove="UI\Views\PincodeEntryView.xaml.cs" />
+    <Compile Remove="UI\Views\ActivationCodeEntryView.xaml.cs" />
+    <Compile Remove="UI\Views\PENCodeEntryView.xaml.cs" />
+    <Compile Remove="UI\Views\SMSEntryView.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="Resources\digid_afbeelding_iddocument_achter_phone_eng.svg" />
+    <Page Include="Resources\digid_afbeelding_iddocument_achter_phone_nl.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="HtmlLabel.Forms.Plugin">
+      <HintPath>PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="App.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Models\MenuItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Themes\DarkTheme.xaml.cs">
+      <DependentUpon>DarkTheme.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Themes\LightTheme.xaml.cs">
+      <DependentUpon>LightTheme.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UI\LoadingOverlay.xaml.cs">
+      <DependentUpon>LoadingOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Pages\ActivationRDAFailedPage.xaml.cs">
+      <DependentUpon>ActivationRdaFailedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Pages\ActivationRDAConfirmPage.xaml.cs">
+      <DependentUpon>ActivationRdaConfirmPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Pages\ActivationRDACompletedPage.xaml.cs">
+      <DependentUpon>ActivationRdaCompletedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Pages\AP106.xaml.cs">
+      <DependentUpon>AP106.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Pages\AP118.xaml.cs">
+      <DependentUpon>AP118.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Views\ActivationCodeEntryView.xaml.cs">
+      <DependentUpon>ActivationCodeEntryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Views\BlurredOverlay.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>BlurredOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Views\CustomIconListItemView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Popups\MainMenuPopup.xaml.cs">
+      <DependentUpon>MainMenuPopup.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Themes\BaseTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Controls\MenuSwitchControl.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Controls\MenuView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Pages\ActivationRdaFailedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Pages\AP106.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Pages\AP117.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Pages\AP118.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Pages\AP119.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Pages\AP120.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Pages\UsageHistoryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Pages\VideoPlayerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Pages\WebViewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Pages\WIDPhotoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Pages\WidSuspendedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Popups\CardStatePopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Popups\NoConnectivityPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Popups\RemoteNotificationDisabledPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Views\ChangeAppPinCode.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Views\ChangeWidPinCode.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Views\CustomListItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

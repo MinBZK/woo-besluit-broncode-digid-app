@@ -1,0 +1,133 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:BaseActivationPage
+    x:Class="DigiD.UI.Pages.EmailRegisterPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:common="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:controlTemplates="clr-namespace:DigiD.Common.Mobile.ControlTemplates;assembly=DigiD.Common.Mobile"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:pages="clr-namespace:DigiD.UI.Pages;assembly=DigiD"
+    xmlns:viewModels="clr-namespace:DigiD.ViewModels;assembly=DigiD"
+    x:DataType="viewModels:EmailRegisterViewModel">
+    <ContentView ControlTemplate="{x:Static controlTemplates:TemplateSelector.CurrentTemplate}">
+        <StackLayout Spacing="10" VerticalOptions="Fill">
+
+            <ScrollView
+                Padding="20,0,20,20"
+                Orientation="Vertical"
+                VerticalOptions="FillAndExpand">
+                <StackLayout Spacing="20" VerticalOptions="FillAndExpand">
+
+                    <controls:CustomFontLabel
+                        Padding="0,20,0,0"
+                        Style="{StaticResource LabelHeader}"
+                        Text="{Binding HeaderText}" />
+                    <Grid ColumnSpacing="0" VerticalOptions="Start">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <controls:CustomSvgImage
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,5,0"
+                            AutomationProperties.IsInAccessibleTree="False"
+                            HeightRequest="20"
+                            IsVisible="{Binding IsError}"
+                            Source="resource://DigiD.Common.Resources.icon_foutmelding_kritiek.svg?assembly=DigiD.Common"
+                            VerticalOptions="Start"
+                            WidthRequest="20" />
+
+                        <controls:CustomFontLabel
+                            Grid.Column="1"
+                            Margin="0,0,10,0"
+                            AutomationProperties.Name="{Binding AccessibilityFooterText}"
+                            Style="{StaticResource LabelRegular}"
+                            Text="{Binding FooterText}" />
+
+                        <controls:HelpButtonView
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            InfoPageType="EmailEntry"
+                            VerticalOptions="Start" />
+                    </Grid>
+
+                    <controls:CustomEntryField
+                        x:Name="DefaultElement"
+                        AutomationId="{x:Static common:AppResources.AP080_Entry}"
+                        Keyboard="Email"
+                        LabelText="{x:Static common:AppResources.AP080_Entry}"
+                        MakePlaceholderInvisible="True"
+                        Placeholder="{x:Static common:AppResources.AP080_Entry}"
+                        ReturnCommand="{Binding ButtonCommand}"
+                        ReturnType="Next"
+                        Text="{Binding EmailAddress}" />
+
+                </StackLayout>
+            </ScrollView>
+            <controls:AccessibilityContentView x:Name="buttonPanel" VerticalOptions="EndAndExpand">
+                <Grid
+                    Margin="20,0,20,20"
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="20"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto"
+                    VerticalOptions="EndAndExpand">
+
+                    <controls:BorderedButton
+                        x:Name="secondaryButton"
+                        Grid.Column="0"
+                        ButtonType="Secundairy"
+                        Command="{Binding ButtonSkipCommand}"
+                        HeightRequest="{x:Static controls:BorderedButton.DefaultButtonHeightValue}"
+                        Text="{x:Static common:AppResources.AP080_Button1}" />
+
+                    <controls:BorderedButton
+                        x:Name="primaryButton"
+                        Grid.Column="1"
+                        AutomationProperties.IsInAccessibleTree="True"
+                        Command="{Binding ButtonCommand}"
+                        HeightRequest="{x:Static controls:BorderedButton.DefaultButtonHeightValue}"
+                        IsEnabled="{Binding IsValid}"
+                        Text="{x:Static common:AppResources.AP080_Button2}" />
+                </Grid>
+
+            </controls:AccessibilityContentView>
+        </StackLayout>
+    </ContentView>
+</pages:BaseActivationPage>

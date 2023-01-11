@@ -1,0 +1,99 @@
+<!-- De openbaarmaking van dit bestand is in het kader van de WOO geschied en  -->
+<!-- dus gericht op transparantie en niet op hergebruik. In het geval dat dit  -->
+<!-- bestand hergebruikt wordt, is de EUPL licentie van toepassing, met  -->
+<!-- uitzondering van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-verzoek-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit WOO-verzoek kunt u mailen met: -->
+<!--   mailto://open@logius.nl -->
+<!-- -->
+﻿<xct:Popup
+    x:Class="DigiD.Common.Controls.AlertView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:markup="clr-namespace:DigiD.Common.Markup"
+    xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+    HorizontalOptions="{OnPlatform Android=Center,
+                                   iOS=Center}"
+    Opacity="{OnPlatform iOS=0}"
+    VerticalOptions="{OnPlatform Android=Center,
+                                 iOS=Center}">
+    <Frame
+        x:Name="popupFrame"
+        BackgroundColor="{DynamicResource PageBackgroundColor}"
+        CornerRadius="8"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+        <ScrollView
+            x:Name="scrollView"
+            Padding="20,0,20,20"
+            HorizontalOptions="Center"
+            HorizontalScrollBarVisibility="Never"
+            VerticalOptions="Center"
+            VerticalScrollBarVisibility="Never">
+            <StackLayout
+                x:Name="container"
+                Spacing="20"
+                VerticalOptions="Start">
+                <controls:CustomFontLabel
+                    x:Name="PopupHeader"
+                    Padding="0,20,0,0"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    Style="{StaticResource LabelHeader}"
+                    Text="{Binding HeaderText}" />
+
+                <controls:CustomFontLabel
+                    Margin="0"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    Style="{StaticResource LabelRegular}"
+                    Text="{Binding MessageText}" />
+
+                <controls:BorderedButton
+                    Clicked="BorderedButton_OkClicked"
+                    IsVisible="{Binding SingleButtonVisible}"
+                    Text="{Binding AcceptText}" />
+
+                <Grid
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="{markup:DoubleOrientation Landscape=20,
+                                                             Portrait={markup:DoubleSFS Normal=20,
+                                                                                        ExtraLarge=0}}"
+                    IsVisible="{Binding TwoButtonsVisible}"
+                    RowDefinitions="*,Auto"
+                    VerticalOptions="EndAndExpand">
+                    <controls:BorderedButton
+                        x:Name="btnCancel"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="{markup:IntOrientation Landscape=1,
+                                                                Portrait={markup:IntSFS Normal=1,
+                                                                                        ExtraLarge=2}}"
+                        ButtonType="Secundairy"
+                        Clicked="BorderedButton_CancelClicked"
+                        TabIndex="10"
+                        Text="{Binding CancelText}" />
+                    <controls:BorderedButton
+                        x:Name="btnAccept"
+                        Grid.Row="{markup:IntOrientation Landscape=0,
+                                                         Portrait={markup:IntSFS Normal=0,
+                                                                                 ExtraLarge=1}}"
+                        Grid.Column="{markup:IntOrientation Landscape=1,
+                                                            Portrait={markup:IntSFS Normal=1,
+                                                                                    ExtraLarge=0}}"
+                        Grid.ColumnSpan="{markup:IntOrientation Landscape=1,
+                                                                Portrait={markup:IntSFS Normal=1,
+                                                                                        ExtraLarge=2}}"
+                        Clicked="BorderedButton_OkClicked"
+                        Text="{Binding AcceptText}" />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </Frame>
+</xct:Popup>

@@ -1,0 +1,85 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="DigiD.Themes.DarkTheme"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:themes="clr-namespace:DigiD.Themes;assembly=DigiD">
+    <ResourceDictionary.MergedDictionaries>
+        <!--  Zie ook https://forums.xamarin.com/discussion/129871/how-do-i-reference-one-xaml-mergeddictionary-from-another  -->
+        <!--  ResourceDictionary Source="/Themes/BaseTheme.xaml" /  -->
+        <themes:BaseTheme />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Color x:Key="DisabledButtonBackgroundColor">#b4b4b3</Color>
+    <Color x:Key="DisabledButtonTextColor">#595959</Color>
+    <Color x:Key="PrimaryButtonTextColor">#FFFFFF</Color>
+    <Color x:Key="SecundairyButtonBackgroundColor">#2A2B31</Color>
+
+    <!--  Common color settings  -->
+    <Color x:Key="PageBackgroundColor">#2A2B31</Color>
+    <Color x:Key="disabledTextColor">#535353</Color>
+
+    <!--  Navigation Bar color settings  -->
+    <Color x:Key="BarTextColor">#FFFFFF</Color>
+    <Color x:Key="BarBackgroundColor">#2A2B31</Color>
+    <Color x:Key="BarBackgroundColorLandscape">#2A2B31</Color>
+
+    <!--  Pintile color settings  -->
+    <Color x:Key="PinTileTextColor">#000000</Color>
+
+    <!--  NumberPad color settings  -->
+    <Color x:Key="LabelSubTextColor">#999999</Color>
+    <Color x:Key="NumberPadSubTextColor">#B4B4B4</Color>
+    <Color x:Key="NumberPadBackgroundColor">#2A2B31</Color>
+    <Color x:Key="NumberPadButtonTextColor">#FFFFFF</Color>
+    <Color x:Key="NumberPadButtonBackgroundColor">#54555B</Color>
+    <Color x:Key="NumberPadButtonPressedBackgroundColor">#6E6E78</Color>
+
+    <!--  Settings color setting  -->
+    <Color x:Key="SettingsSectionBackgroundColor">#404146</Color>
+    <Color x:Key="SettingsSeparatorColor">#2A2B31</Color>
+    |
+    <!--  CustomEntryField color settings  -->
+    <Color x:Key="CustomEntryFieldEntryTextColor">#FFFFFF</Color>
+    <Color x:Key="CustomEntryFieldLabelTextColor">#a2a2a2</Color>
+    <Color x:Key="CustomEntryFieldFrameBorderColor">#cccccc</Color>
+    <Color x:Key="CustomEntryFieldFrameRequiredBorderColor">#D52B1E</Color>
+    <Color x:Key="CustomEntryFieldBackgroundColor">#2A2B31</Color>
+    <Color x:Key="CustomEntryFieldPlaceholderColor">#b4b4b4</Color>
+    <Color x:Key="CustomEntryFieldActiveBackgroundColor">#2A2B31</Color>
+
+    <Color x:Key="MessageBoxBackgroundColor">#4B4B4B</Color>
+    <Color x:Key="MessageBoxTimeTextColor">#B4B4B4</Color>
+
+    <Color x:Key="TabBackgroundColor">#42424B</Color>
+</ResourceDictionary>

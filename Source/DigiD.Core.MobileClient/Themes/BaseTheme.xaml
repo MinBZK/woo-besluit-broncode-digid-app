@@ -1,0 +1,271 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="DigiD.Themes.BaseTheme"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:html="clr-namespace:DigiD.Controls;assembly=DigiD"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:converters="clr-namespace:DigiD.Common.Converters;assembly=DigiD.Common"
+    xmlns:effects="clr-namespace:DigiD.Common.Effects;assembly=DigiD.Common"
+    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+    <Color x:Key="PrimaryColor">#E17000</Color>
+    <Color x:Key="PrimaryColorTransparent">#4DE17000</Color>
+    <Color x:Key="Gray2">#D8D8D8</Color>
+    <Color x:Key="Gray3">#F3F5F6</Color>
+    <Color x:Key="Gray4">#AAAAAA</Color>
+    <Color x:Key="Gray5">#E5E5E5</Color>
+    <Color x:Key="Gray6">#404040</Color>
+    <Color x:Key="Gray7">#B4B4B4</Color>
+    <Color x:Key="Gray8">#F5F5F5F5</Color>
+    <Color x:Key="Gray9">#F3F3F3</Color>
+    <Color x:Key="TooltipColor">#FBEAD9</Color>
+    <Color x:Key="TooltipTextColor">#000000</Color>
+    <Color x:Key="MessageBoxNewBackgroundColor">#FFF4DC</Color>
+    <Color x:Key="Black70Transparent">#B3000000</Color>
+    <Color x:Key="Black30Transparent">#4D000000</Color>
+    <Color x:Key="DemoBarColor">#00ABFF</Color>
+
+    <Color x:Key="TextColorLight">#000000</Color>
+    <Color x:Key="TextColorDark">#FFFFFF</Color>
+
+    <Color x:Key="MenuItemBackgroundColorLight">#F2F5F6</Color>
+    <Color x:Key="MenuItemBackgroundColorDark">#54555B</Color>
+
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{DynamicResource BarBackgroundColor}" />
+        <Setter Property="BarTextColor" Value="{DynamicResource BarTextColor}" />
+    </Style>
+
+    <Style TargetType="Entry">
+        <Setter Property="FontFamily" Value="RO-Regular" />
+    </Style>
+
+    <Style
+        x:Key="LabelRegular"
+        ApplyToDerivedTypes="True"
+        TargetType="controls:CustomFontLabel">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+        <Setter Property="FontFamily" Value="RO-Regular" />
+        <Setter Property="FontSize" Value="Body" />
+    </Style>
+
+    <Style
+        x:Key="SpanBold"
+        ApplyToDerivedTypes="True"
+        BaseResourceKey="LabelRegular"
+        TargetType="Span">
+        <Setter Property="FontFamily" Value="RO-Bold" />
+    </Style>
+
+    <Style
+        x:Key="SpanRegular"
+        ApplyToDerivedTypes="True"
+        BaseResourceKey="BodyStyle"
+        TargetType="Span">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+        <Setter Property="FontFamily" Value="RO-Regular" />
+        <Setter Property="FontSize" Value="Body" />
+    </Style>
+
+    <Style
+        x:Key="LabelBold"
+        ApplyToDerivedTypes="True"
+        BaseResourceKey="LabelRegular"
+        TargetType="controls:CustomFontLabel">
+        <Setter Property="FontFamily" Value="RO-Bold" />
+    </Style>
+
+    <Style x:Key="DemoBarLabel" TargetType="controls:CustomFontLabel">
+        <Setter Property="FontFamily" Value="RO-Bold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+    </Style>
+
+    <Style x:Key="DemoBarPageLabel" TargetType="controls:CustomFontLabel">
+        <Setter Property="FontFamily" Value="RO-Bold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="Red" />
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="Start" />
+    </Style>
+
+    <Style x:Key="DemoBar" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource DemoBarColor}" />
+        <Setter Property="HeightRequest" Value="20" />
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Padding" Value="10,0" />
+    </Style>
+
+    <Style
+        x:Key="LabelHeader"
+        ApplyToDerivedTypes="True"
+        BaseResourceKey="TitleStyle"
+        TargetType="controls:CustomFontLabel">
+        <Setter Property="FontFamily" Value="RO-Bold" />
+        <Setter Property="FontSize" Value="Title" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="effects:A11YEffect.ControlType" Value="Header" />
+        <Setter Property="AutomationProperties.IsInAccessibleTree" Value="True" />
+    </Style>
+
+    <Style
+        x:Key="LabelNavbarHeader"
+        ApplyToDerivedTypes="True"
+        BaseResourceKey="TitleStyle"
+        TargetType="controls:CustomFontLabel">
+        <Setter Property="FontFamily" Value="RO-Bold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{DynamicResource BarTextColor}" />
+        <Setter Property="effects:A11YEffect.ControlType" Value="Header" />
+        <Setter Property="AutomationProperties.IsInAccessibleTree" Value="True" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style
+        x:Key="HtmlLabelRegular"
+        BaseResourceKey="BodyStyle"
+        TargetType="html:CustomHtmlLabel">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+        <Setter Property="FontSize" Value="Body" />
+        <Setter Property="LinkColor" Value="{DynamicResource PrimaryColor}" />
+    </Style>
+
+    <Style
+        x:Key="ButtonWithVisualState"
+        ApplyToDerivedTypes="True"
+        BaseResourceKey="BodyStyle"
+        TargetType="controls:BorderedButton">
+        <Setter Property="AutomationProperties.IsInAccessibleTree" Value="True" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="Body" />
+        <Setter Property="FontFamily" Value="RO-Bold" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="ButtonState">
+                    <VisualState x:Name="Primary">
+                        <VisualState.Setters>
+                            <Setter Property="BorderColor" Value="{DynamicResource PrimaryColor}" />
+                            <Setter Property="BorderWidth" Value="2" />
+                            <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                            <Setter Property="TextColor" Value="{DynamicResource PrimaryButtonTextColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Secundairy">
+                        <VisualState.Setters>
+                            <Setter Property="BorderColor" Value="{DynamicResource PrimaryColor}" />
+                            <Setter Property="BorderWidth" Value="2" />
+                            <Setter Property="BackgroundColor" Value="{DynamicResource SecundairyButtonBackgroundColor}" />
+                            <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BorderColor" Value="{DynamicResource DisabledButtonBackgroundColor}" />
+                            <Setter Property="BorderWidth" Value="2" />
+                            <Setter Property="BackgroundColor" Value="{DynamicResource DisabledButtonBackgroundColor}" />
+                            <Setter Property="TextColor" Value="{DynamicResource DisabledButtonTextColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LabelAsLinkStyle" TargetType="Label">
+        <Setter Property="effects:A11YEffect.ControlType" Value="LinkLabel" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="TextDecorations" Value="Underline" />
+        <Setter Property="FontFamily" Value="RO-Bold" />
+        <Setter Property="FontSize" Value="Body" />
+    </Style>
+
+    <Style x:Key="ButtonAsMenuItemStyle" TargetType="Button">
+        <Setter Property="FontFamily" Value="RO-Regular" />
+        <Setter Property="FontSize" Value="Body" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="TextColor" Value="{DynamicResource TooltipTextColor}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="BorderWidth" Value="0" />
+    </Style>
+
+    <Style x:Key="ActiveTabActive" TargetType="pancakeView:PancakeView">
+        <Setter Property="CornerRadius" Value="5,5,0,0" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}" />
+    </Style>
+
+    <Style
+        x:Key="TabLabelActive"
+        BaseResourceKey="LabelRegular"
+        TargetType="controls:CustomFontLabel">
+        <Setter Property="Margin" Value="22,9,22,13" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="RO-Bold" />
+    </Style>
+
+    <Style
+        x:Key="TabLabelInactive"
+        BaseResourceKey="TabLabelActive"
+        TargetType="controls:CustomFontLabel">
+        <Setter Property="FontFamily" Value="RO-Regular" />
+    </Style>
+
+    <Style x:Key="TabLayout" TargetType="Grid">
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource TabBackgroundColor}" />
+        <Setter Property="Padding" Value="5,5,5,0" />
+    </Style>
+
+    <converters:TextToVisibleConverter x:Key="TextToVisibleConverter" />
+    <converters:BooleanInvertConverter x:Key="BooleanInvertConverter" />
+    <converters:BooleanAndConverter x:Key="BooleanAndConverter" />
+    <converters:SourceVisibleConverter x:Key="SourceVisibleConverter" />
+    <converters:StripHtmlConverter x:Key="StripHtmlConverter" />
+    <converters:SpeakLetterForLetterConverter x:Key="SpeakLetterForLetterConverter" />
+    <converters:CommandVisibleConverter x:Key="CommandVisibleConverter" />
+</ResourceDictionary>

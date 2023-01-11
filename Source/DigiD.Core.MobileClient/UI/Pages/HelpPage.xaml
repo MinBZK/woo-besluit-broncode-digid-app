@@ -1,0 +1,100 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<ContentPage
+    x:Class="DigiD.UI.Pages.HelpPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:common="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:effects="clr-namespace:DigiD.Common.Effects;assembly=DigiD.Common"
+    xmlns:html="clr-namespace:DigiD.Controls;assembly=DigiD"
+    AutomationProperties.IsInAccessibleTree="{OnPlatform Android=True}"
+    AutomationProperties.Name="{Binding Path=HeaderText, StringFormat={x:Static common:AppResources.InformationHelp}}"
+    BackgroundColor="{OnPlatform Android={StaticResource Black30Transparent},
+                                 iOS={StaticResource Black70Transparent}}">
+    <Frame
+        Padding="0"
+        BackgroundColor="{DynamicResource Key=PageBackgroundColor}"
+        CornerRadius="8"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+        <ScrollView
+            x:Name="scrollView"
+            AutomationProperties.IsInAccessibleTree="{OnPlatform Android=True}"
+            HorizontalScrollBarVisibility="Never">
+            <StackLayout
+                x:Name="container"
+                Padding="20,8,20,20"
+                SizeChanged="Layout_SizeChanged"
+                Spacing="20"
+                VerticalOptions="Start">
+
+                <ImageButton
+                    Padding="12"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    AutomationProperties.Name="{x:Static common:AppResources.Cancel}"
+                    BackgroundColor="Transparent"
+                    Clicked="ReadButton_OnClicked"
+                    HeightRequest="48"
+                    HorizontalOptions="End"
+                    Source="{AppThemeBinding Light='icon_sluiten.png',
+                                             Dark='icon_sluiten_dark.png'}"
+                    VerticalOptions="Start"
+                    WidthRequest="48" />
+
+                <controls:CustomFontLabel
+                    effects:A11YEffect.ControlType="Header"
+                    IsVisible="{Binding AnimationVisible, Converter={StaticResource Key=BooleanInvertConverter}}"
+                    Style="{StaticResource LabelHeader}"
+                    Text="{Binding HeaderText}" />
+
+                <html:CustomHtmlLabel
+                    x:Name="messageHtmlLabel"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding AnimationVisible, Converter={StaticResource Key=BooleanInvertConverter}}"
+                    Style="{StaticResource HtmlLabelRegular}"
+                    Text="{Binding Message}"
+                    VerticalOptions="FillAndExpand" />
+
+                <controls:BorderedButton
+                    x:Name="ReadButton"
+                    ButtonType="Primary"
+                    Clicked="ReadButton_OnClicked"
+                    IsVisible="{Binding AnimationVisible, Converter={StaticResource Key=BooleanInvertConverter}}"
+                    Text="{x:Static common:AppResources.Done}" />
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ReadButton_OnClicked" />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+        </ScrollView>
+    </Frame>
+</ContentPage>

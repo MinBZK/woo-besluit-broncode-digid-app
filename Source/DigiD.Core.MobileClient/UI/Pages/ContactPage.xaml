@@ -1,0 +1,143 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<baseClasses:BaseContentPage
+    x:Class="DigiD.UI.Pages.ContactPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:baseClasses="clr-namespace:DigiD.Common.Mobile.BaseClasses;assembly=DigiD.Common.Mobile"
+    xmlns:common="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:controlTemplates="clr-namespace:DigiD.Common.Mobile.ControlTemplates;assembly=DigiD.Common.Mobile"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:html="clr-namespace:DigiD.Controls;assembly=DigiD"
+    xmlns:viewModels="clr-namespace:DigiD.ViewModels;assembly=DigiD"
+    x:DataType="viewModels:ContactViewModel"
+    ScrollHeaderEnabled="True">
+    <NavigationPage.TitleView>
+        <controls:CustomFontLabel Style="{StaticResource LabelNavbarHeader}" Text="{Binding HeaderText}" />
+    </NavigationPage.TitleView>
+    <ContentView ControlTemplate="{x:Static controlTemplates:TemplateSelector.CurrentTemplate}">
+        <ScrollView Padding="20,0,20,20" Scrolled="ScrollView_OnScrolled">
+            <StackLayout Spacing="20">
+                <controls:CustomFontLabel
+                    Padding="0,20,0,0"
+                    AutomationProperties.IsInAccessibleTree="True"
+                    Style="{StaticResource LabelHeader}"
+                    Text="{Binding HeaderText}" />
+
+                <html:CustomHtmlLabel
+                    HorizontalOptions="FillAndExpand"
+                    Style="{StaticResource HtmlLabelRegular}"
+                    Text="{x:Static common:AppResources.ContactText}">
+                    <html:CustomHtmlLabel.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ZoekContactVia}" CommandParameter="{x:Static viewModels:ContactViewModel.ContactViaDigiDWebsite}" />
+                    </html:CustomHtmlLabel.GestureRecognizers>
+                </html:CustomHtmlLabel>
+                <Grid
+                    ColumnDefinitions="*, Auto"
+                    ColumnSpacing="20"
+                    HorizontalOptions="StartAndExpand"
+                    RowDefinitions="Auto,Auto,Auto"
+                    RowSpacing="40"
+                    VerticalOptions="StartAndExpand">
+
+                    <html:CustomHtmlLabel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Style="{StaticResource HtmlLabelRegular}"
+                        Text="{x:Static common:AppResources.ContactByContactForm}"
+                        VerticalOptions="Start">
+                        <html:CustomHtmlLabel.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ZoekContactVia}" CommandParameter="{x:Static viewModels:ContactViewModel.ContactViaContactForm}" />
+                        </html:CustomHtmlLabel.GestureRecognizers>
+                    </html:CustomHtmlLabel>
+                    <controls:CustomSvgImage
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        HeightRequest="50"
+                        Source="resource://DigiD.Resources.digid_icon_contact_contactformulier.svg"
+                        VerticalOptions="Start"
+                        WidthRequest="50">
+                        <controls:CustomSvgImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ZoekContactVia}" CommandParameter="{x:Static viewModels:ContactViewModel.ContactViaContactForm}" />
+                        </controls:CustomSvgImage.GestureRecognizers>
+                    </controls:CustomSvgImage>
+
+                    <html:CustomHtmlLabel
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Style="{StaticResource HtmlLabelRegular}"
+                        Text="{x:Static common:AppResources.ContactByPhone}"
+                        VerticalOptions="Start">
+                        <html:CustomHtmlLabel.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ZoekContactVia}" CommandParameter="{x:Static viewModels:ContactViewModel.ContactViaPhone}" />
+                        </html:CustomHtmlLabel.GestureRecognizers>
+                    </html:CustomHtmlLabel>
+
+                    <controls:CustomSvgImage
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        HeightRequest="50"
+                        Source="resource://DigiD.Resources.digid_icon_contact_telefoon.svg"
+                        VerticalOptions="Start"
+                        WidthRequest="50">
+                        <controls:CustomSvgImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ZoekContactVia}" CommandParameter="{x:Static viewModels:ContactViewModel.ContactViaPhone}" />
+                        </controls:CustomSvgImage.GestureRecognizers>
+                    </controls:CustomSvgImage>
+
+                    <html:CustomHtmlLabel
+                        x:Name="contactByTwitter"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Style="{StaticResource HtmlLabelRegular}"
+                        Text="{x:Static common:AppResources.ContactByTwitter}"
+                        VerticalOptions="Start">
+                        <html:CustomHtmlLabel.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ZoekContactVia}" CommandParameter="{x:Static viewModels:ContactViewModel.ContactViaTwitter}" />
+                        </html:CustomHtmlLabel.GestureRecognizers>
+                    </html:CustomHtmlLabel>
+                    <controls:CustomSvgImage
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        HeightRequest="50"
+                        Source="resource://DigiD.Resources.digid_icon_contact_twitter.svg"
+                        VerticalOptions="Start"
+                        WidthRequest="50">
+                        <controls:CustomSvgImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ZoekContactVia}" CommandParameter="{x:Static viewModels:ContactViewModel.ContactViaTwitter}" />
+                        </controls:CustomSvgImage.GestureRecognizers>
+                    </controls:CustomSvgImage>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentView>
+</baseClasses:BaseContentPage>

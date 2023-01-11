@@ -1,0 +1,123 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<baseClasses:BasePopup
+    x:Class="DigiD.UI.Popups.CardStatePopup"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:baseClasses="clr-namespace:DigiD.Common.BaseClasses;assembly=DigiD.Common"
+    xmlns:common="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:popups="clr-namespace:DigiD.UI.Popups;assembly=DigiD"
+    x:DataType="popups:CardStatePopup"
+    HorizontalOptions="CenterAndExpand"
+    VerticalOptions="CenterAndExpand">
+    <StackLayout
+        Padding="20"
+        BackgroundColor="{DynamicResource PageBackgroundColor}"
+        Spacing="20">
+        <Grid ColumnDefinitions="auto,*" RowDefinitions="auto">
+            <controls:CustomFontLabel
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource LabelBold}"
+                Text="{x:Static common:AppResources.CardDemo_CurrentPin}"
+                VerticalTextAlignment="Center" />
+            <controls:CustomFontLabel
+                Grid.Column="1"
+                HorizontalOptions="End"
+                Style="{StaticResource LabelRegular}"
+                Text="{Binding PIN}"
+                VerticalTextAlignment="Center" />
+
+            <controls:CustomFontLabel
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource LabelBold}"
+                Text="{x:Static common:AppResources.CardDemo_Tries}"
+                VerticalTextAlignment="Center" />
+            <controls:CustomFontLabel
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalOptions="End"
+                Style="{StaticResource LabelRegular}"
+                Text="{Binding Tries}"
+                VerticalTextAlignment="Center" />
+
+            <controls:CustomFontLabel
+                Grid.Row="2"
+                Grid.Column="0"
+                Style="{StaticResource LabelBold}"
+                Text="{x:Static common:AppResources.CardDemo_TransportMode}"
+                VerticalTextAlignment="Center" />
+            <Switch
+                Grid.Row="2"
+                Grid.Column="1"
+                HorizontalOptions="End"
+                IsToggled="{Binding ChangePinRequired}" />
+
+            <controls:CustomFontLabel
+                Grid.Row="3"
+                Grid.Column="0"
+                Style="{StaticResource LabelBold}"
+                Text="{x:Static common:AppResources.CardDemo_IsBlocked}"
+                VerticalTextAlignment="Center" />
+
+            <Switch
+                Grid.Row="3"
+                Grid.Column="1"
+                HorizontalOptions="End"
+                IsToggled="{Binding IsBlocked}" />
+
+            <controls:CustomFontLabel
+                Grid.Row="4"
+                Grid.Column="0"
+                Style="{StaticResource LabelBold}"
+                Text="{x:Static common:AppResources.CardDemo_IsSuspended}"
+                VerticalTextAlignment="Center" />
+
+            <Switch
+                Grid.Row="4"
+                Grid.Column="1"
+                HorizontalOptions="End"
+                IsToggled="{Binding IsSuspended}" />
+
+            <controls:BorderedButton
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Command="{Binding ResetCommand}"
+                Text="Reset" />
+
+        </Grid>
+    </StackLayout>
+
+</baseClasses:BasePopup>

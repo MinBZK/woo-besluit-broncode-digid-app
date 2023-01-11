@@ -1,0 +1,130 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<baseClasses:BaseContentPage
+    x:Class="DigiD.UI.Pages.ConfirmRDAPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:anim="clr-namespace:DigiD.Common.Mobile.Controls;assembly=DigiD.Common.Mobile"
+    xmlns:baseClasses="clr-namespace:DigiD.Common.Mobile.BaseClasses;assembly=DigiD.Common.Mobile"
+    xmlns:common="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:controlTemplates="clr-namespace:DigiD.Common.Mobile.ControlTemplates;assembly=DigiD.Common.Mobile"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:viewModels="clr-namespace:DigiD.ViewModels;assembly=DigiD"
+    x:DataType="viewModels:ConfirmRdaViewModel">
+    <ContentView ControlTemplate="{x:Static controlTemplates:TemplateSelector.CurrentTemplate}">
+        <Grid
+            RowDefinitions="*, Auto"
+            RowSpacing="10"
+            VerticalOptions="Fill">
+
+            <ScrollView
+                Padding="20,0,20,20"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
+                    <controls:CustomFontLabel
+                        Padding="0,20,0,0"
+                        Style="{StaticResource LabelHeader}"
+                        Text="{Binding HeaderText}" />
+
+                    <Grid
+                        ColumnSpacing="0"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Start">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <controls:CustomFontLabel
+                            Grid.Column="0"
+                            AutomationProperties.IsInAccessibleTree="True"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{StaticResource LabelRegular}"
+                            TabIndex="10"
+                            Text="{x:Static common:AppResources.LoginAndUpgradeFooter}"
+                            VerticalOptions="Start" />
+
+                        <controls:HelpButtonView
+                            Grid.Column="1"
+                            AutomationProperties.IsInAccessibleTree="True"
+                            InfoPageType="LoginAndUpgrade"
+                            TabIndex="10"
+                            VerticalOptions="Start" />
+                    </Grid>
+
+                    <StackLayout IsVisible="{Binding ShowIdsTitle}" VerticalOptions="Start">
+                        <controls:CustomFontLabel Style="{StaticResource LabelRegular}" Text="{x:Static common:AppResources.PossibleIDs_Title}" />
+
+                        <controls:CustomFontLabel
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource LabelRegular}"
+                            Text="{x:Static common:AppResources.PossibleIDs}" />
+                    </StackLayout>
+
+                    <!--  Height is 0 als fix voor uitrekken  -->
+                    <anim:CustomAnimationView
+                        x:Name="animationView"
+                        AlternateText="{x:Static common:AppResources.AlternateTextExplainIDBewijs}"
+                        Animation="{x:Static common:AppResources.NFC_RDA_Animation}"
+                        AutoPlay="True"
+                        HeightRequest="0"
+                        HorizontalOptions="FillAndExpand"
+                        RepeatMode="Infinite"
+                        TabIndex="20"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+            </ScrollView>
+
+            <Grid
+                Grid.Row="1"
+                Margin="20,0,20,20"
+                Padding="0"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="20"
+                VerticalOptions="End">
+
+                <controls:BorderedButton
+                    Grid.Column="0"
+                    ButtonType="Secundairy"
+                    Command="{Binding CancelCommand}"
+                    TabIndex="40"
+                    Text="{x:Static common:AppResources.Cancel}" />
+
+                <controls:BorderedButton
+                    Grid.Column="1"
+                    Command="{Binding ButtonCommand}"
+                    TabIndex="30"
+                    Text="{x:Static common:AppResources.GoNextButtonText}" />
+            </Grid>
+        </Grid>
+    </ContentView>
+</baseClasses:BaseContentPage>

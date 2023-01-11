@@ -1,0 +1,213 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<baseClasses:BaseContentPage
+    x:Class="DigiD.Common.RDA.Pages.RDAPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:baseClasses="clr-namespace:DigiD.Common.Mobile.BaseClasses;assembly=DigiD.Common.Mobile"
+    xmlns:common="clr-namespace:DigiD.Common.Mobile.Controls;assembly=DigiD.Common.Mobile"
+    xmlns:common1="clr-namespace:DigiD.Common;assembly=DigiD.Common"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:converters="clr-namespace:DigiD.Common.Converters;assembly=DigiD.Common"
+    xmlns:markup="clr-namespace:DigiD.Common.Markup;assembly=DigiD.Common"
+    xmlns:viewModels="clr-namespace:DigiD.Common.RDA.ViewModels;assembly=DigiD.Common.RDA"
+    xmlns:controlTemplates="clr-namespace:DigiD.Common.Mobile.ControlTemplates;assembly=DigiD.Common.Mobile"
+    x:Name="rdaPage"
+    x:DataType="viewModels:RdaViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BooleanInvertConverter x:Key="BooleanInvertConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentView ControlTemplate="{x:Static controlTemplates:TemplateSelector.CurrentTemplate}">
+
+        <Grid
+            x:Name="mainGrid"
+            Padding="3"
+            ColumnDefinitions="*,*"
+            RowDefinitions="*,Auto"
+            RowSpacing="10"
+            VerticalOptions="FillAndExpand">
+            <ScrollView
+                Grid.Row="0"
+                Grid.ColumnSpan="{markup:IntOrientation Landscape={OnIdiom Phone=1,
+                                                                           Tablet=2},
+                                                        Portrait=2}"
+                Padding="20,0,20,20"
+                VerticalOptions="Fill">
+                <StackLayout VerticalOptions="FillAndExpand">
+                    <Grid
+                        Margin="0,0,0,-20"
+                        ColumnDefinitions="*,Auto"
+                        RowDefinitions="Auto, *, Auto, Auto, Auto"
+                        VerticalOptions="Start">
+                        <controls:CustomFontLabel
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Padding="0,20,0,0"
+                            Style="{DynamicResource LabelHeader}"
+                            Text="{Binding HeaderText}" />
+
+                        <controls:CustomFontLabel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Style="{DynamicResource LabelRegular}"
+                            Text="{Binding FooterText}" />
+
+                        <controls:HelpButtonView
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10,0,0,0"
+                            Command="{Binding OpenHelpCommand}"
+                            VerticalOptions="Start" />
+
+                        <controls:CustomFontLabel
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            IsVisible="{OnPlatform Android=True,
+                                                   iOS=False}"
+                            Style="{StaticResource LabelBold}"
+                            Text="{OnPlatform Android={x:Static common1:AppResources.AP038_SubHeader},
+                                              iOS=''}" />
+
+                        <controls:CustomProgressBar
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            BarHeight="6"
+                            IsVisible="{Binding ProgressVisible}"
+                            Progress="{Binding ProgressValue}"
+                            ProgressColor="{StaticResource PrimaryColor}" />
+
+                        <common:CustomAnimationView
+                            x:Name="animationViewPortrait"
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            AlternateText="{x:Static common1:AppResources.AlternateTextExplainScan}"
+                            Animation="{Binding AnimationSource}"
+                            AutoPlay="True"
+                            HorizontalOptions="FillAndExpand"
+                            IsVisible="{Binding Source={x:Reference rdaPage}, Path=AnimationPortraitVisible}"
+                            RepeatMode="Infinite"
+                            VerticalOptions="Start" />
+
+                        <controls:CustomSvgImage
+                            x:Name="imageViewPortrait"
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            HorizontalOptions="CenterAndExpand"
+                            IsVisible="{Binding Source={x:Reference rdaPage}, Path=ImagePortraitVisible}"
+                            Source="{Binding ImageSource}"
+                            VerticalOptions="Start" />
+
+                    </Grid>
+
+                    <Label
+                        Margin="20,0"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding HelpButtonVisible}"
+                        Style="{StaticResource LabelAsLinkStyle}"
+                        TabIndex="5"
+                        Text="{x:Static common1:AppResources.AP038_HelpText}"
+                        VerticalOptions="EndAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CancelScanCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </ScrollView>
+            <common:CustomAnimationView
+                x:Name="animationViewLandscape"
+                Grid.Row="{markup:IntOrientation Landscape={OnIdiom Phone=0,
+                                                                    Tablet=1},
+                                                 Portrait=1}"
+                Grid.RowSpan="{markup:IntOrientation Landscape={OnIdiom Phone=2,
+                                                                        Tablet=1},
+                                                     Portrait=1}"
+                Grid.Column="{markup:IntOrientation Landscape={OnIdiom Phone=1,
+                                                                       Tablet=0},
+                                                    Portrait=0}"
+                Margin="20,0"
+                AlternateText="{x:Static common1:AppResources.AlternateTextExplainScan}"
+                Animation="{Binding AnimationSource}"
+                AutoPlay="True"
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding Source={x:Reference rdaPage}, Path=AnimationLandscapeVisible}"
+                RepeatMode="Infinite"
+                VerticalOptions="StartAndExpand" />
+
+            <controls:CustomSvgImage
+                x:Name="imageViewLandscape"
+                Grid.Row="{markup:IntOrientation Landscape={OnIdiom Phone=0,
+                                                                    Tablet=1},
+                                                 Portrait=1}"
+                Grid.RowSpan="{markup:IntOrientation Landscape={OnIdiom Phone=2,
+                                                                        Tablet=1},
+                                                     Portrait=1}"
+                Grid.Column="{markup:IntOrientation Landscape={OnIdiom Phone=1,
+                                                                       Tablet=0},
+                                                    Portrait=0}"
+                Margin="20,0"
+                HorizontalOptions="CenterAndExpand"
+                IsVisible="{Binding Source={x:Reference rdaPage}, Path=ImageLandscapeVisible}"
+                Source="{Binding ImageSource}"
+                VerticalOptions="StartAndExpand" />
+
+            <controls:BorderedButton
+                Grid.Row="1"
+                Grid.ColumnSpan="{markup:IntOrientation Landscape={OnIdiom Phone=1,
+                                                                           Tablet=2},
+                                                        Portrait=2}"
+                Margin="20,0,20,20"
+                Command="{Binding RetryScanCommand}"
+                IsVisible="{Binding RetryButtonVisible}"
+                Text="{x:Static common1:AppResources.RetryNFCScanButton}"
+                VerticalOptions="End" />
+
+            <controls:BorderedButton
+                Grid.Row="1"
+                Grid.ColumnSpan="{markup:IntOrientation Landscape={OnIdiom Phone=1,
+                                                                           Tablet=2},
+                                                        Portrait=2}"
+                Margin="20,0,20,20"
+                Command="{Binding EnableNFCCommand}"
+                IsVisible="{Binding NFCDisabled}"
+                Style="{DynamicResource ButtonWithVisualState}"
+                Text="{Binding ButtonText}"
+                VerticalOptions="EndAndExpand" />
+        </Grid>
+
+    </ContentView>
+</baseClasses:BaseContentPage>

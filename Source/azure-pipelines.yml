@@ -1,0 +1,94 @@
+# De openbaarmaking van dit bestand is in het kader van de WOO geschied en 
+# dus gericht op transparantie en niet op hergebruik. In het geval dat dit 
+# bestand hergebruikt wordt, is de EUPL licentie van toepassing, met 
+# uitzondering van broncode waarvoor een andere licentie is aangegeven.
+#
+# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+#   https://github.com/MinBZK/woo-verzoek-broncode-digid-app
+#
+# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+# onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App" 
+#
+# Voor overige vragen over dit WOO-verzoek kunt u mailen met:
+#   mailto://open@logius.nl
+#
+# Xamarin.iOS
+# Build a Xamarin.iOS project.
+# Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
+
+trigger:
+- master
+
+pool:
+  vmImage: 'macos-11'
+
+steps:
+- checkout: self
+  clean: true
+  submodules: true
+  
+# To manually select a Xamarin SDK version on the Microsoft-hosted macOS agent,
+# configure this task with the *Mono* version that is associated with the
+# Xamarin SDK version that you need, and set the "enabled" property to true.
+# See https://go.microsoft.com/fwlink/?linkid=871629
+- script: sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 6_12_16
+  displayName: 'Select the Xamarin SDK version'
+  enabled: true
+
+- task: NuGetToolInstaller@1
+  displayName: 'Installeer NuGet (latest)'
+
+- task: NuGetCommand@2
+  displayName: 'Restore NuGet packages'
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/DigiD.Mobile.sln'
+    feedsToUse: 'select'
+    vstsFeed: 'SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS'
+
+- task: SonarCloudPrepare@1
+  displayName: 'Initialiseer SonarCloud'
+  inputs:
+    SonarCloud: 'SonarCloud BDMCC'
+    organization: 'bdmcc'
+    scannerMode: 'MSBuild'
+    projectKey: 'DIG'
+    projectName: 'DIG - MobileApp - Logius'
+
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: 'SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS'
+    certPwd: $(CertPass)
+    keychain: 'temp'
+
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: 'MCC_DEV_DigiD.mobileprovision'
+
+- task: XamariniOS@2
+  displayName: 'Build Xamarin iOS'
+  inputs:
+    solutionFile: '**/DigiD.Mobile.iOS.sln'
+    configuration: 'Develop'
+    buildForSimulator: true
+    packageApp: true
+
+- task: XamarinAndroid@1
+  displayName: 'Build Xamarin Android'
+  inputs:
+    projectFile: '**/DigiD.Droid.csproj'
+    configuration: 'Develop'
+    createAppPackage: true
+    jdkOption: 'JDKVersion'
+    msbuildVersionOption: latest
+    msbuildArchitectureOption: x86
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  displayName: 'Publiceer data naar SonarCloud.'
+  inputs:
+    pollingTimeoutSec: '300'

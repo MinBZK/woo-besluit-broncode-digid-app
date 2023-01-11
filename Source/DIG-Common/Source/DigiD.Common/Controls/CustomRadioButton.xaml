@@ -1,0 +1,47 @@
+<!-- De openbaarmaking van dit bestand is in het kader van de WOO geschied en  -->
+<!-- dus gericht op transparantie en niet op hergebruik. In het geval dat dit  -->
+<!-- bestand hergebruikt wordt, is de EUPL licentie van toepassing, met  -->
+<!-- uitzondering van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-verzoek-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit WOO-verzoek kunt u mailen met: -->
+<!--   mailto://open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="DigiD.Common.Controls.CustomRadioButton"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:DigiD.Common.Controls;assembly=DigiD.Common"
+    xmlns:effects="clr-namespace:DigiD.Common.Effects"
+    effects:A11YEffect.ControlType="{OnPlatform Android=Button, iOS=None}"
+    ColumnDefinitions="auto, *"
+    ColumnSpacing="10" >
+    <controls:CustomSvgImage
+        x:Name="img"
+        Grid.Column="0"
+        AutomationProperties.IsInAccessibleTree="False"
+        FadeAnimationEnabled="False"
+        HeightRequest="20"
+        Source="resource://DigiD.Resources.digid_icon_radiobutton_app_off.svg"
+        VerticalOptions="Start"
+        WidthRequest="20" />
+    <controls:CustomFontLabel
+        effects:A11YEffect.ControlType="{OnPlatform iOS=Button, Android=None}"
+        x:Name="lbl"
+        Grid.Column="1"
+        Margin="0,5,40,0"
+        AutomationProperties.IsInAccessibleTree="{OnPlatform iOS=True, Android=False}"
+        Style="{StaticResource LabelBold}"
+        VerticalOptions="Start"
+        VerticalTextAlignment="Center" />
+    <Grid.GestureRecognizers>
+        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_OnTapped" />
+    </Grid.GestureRecognizers>
+</Grid>

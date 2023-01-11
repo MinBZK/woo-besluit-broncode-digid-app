@@ -1,0 +1,234 @@
+# Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze 
+# gericht is op transparantie en niet op hergebruik. Hergebruik van 
+# de broncode is toegestaan onder de EUPL licentie, met uitzondering 
+# van broncode waarvoor een andere licentie is aangegeven.
+#
+# Het archief waar dit bestand deel van uitmaakt is te vinden op:
+#   https://github.com/MinBZK/woo-besluit-broncode-digid-app
+#
+# Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via:
+#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+# onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App" 
+#
+# Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl
+#
+# This code has been disclosed in response to a request under the Dutch
+# Open Government Act ("Wet open Overheid"). This implies that publication 
+# is primarily driven by the need for transparence, not re-use.
+# Re-use is permitted under the EUPL-license, with the exception 
+# of source files that contain a different license.
+#
+# The archive that this file originates from can be found at:
+#   https://github.com/MinBZK/woo-besluit-broncode-digid-app
+#
+# Security vulnerabilities may be responsibly disclosed via the Dutch NCSC:
+#   https://www.ncsc.nl/contact/kwetsbaarheid-melden
+# using the reference "Logius, publicly disclosed source code DigiD-App" 
+#
+# Other questions regarding this Open Goverment Act decision may be
+# directed via email to open@logius.nl
+#
+# ===================================================================================================
+#
+# Beschrijving: 
+#     DIG_Mobile ProjectConfig.yml 
+# 
+# ===================================================================================================
+
+# ===================================================================================================
+#
+# Branch: ALGEMEEN Is eigenlijke geen branch, maar fungeert als
+#                  sectie naam voor algemene configuratie variabelen. 
+#
+# ---------------------------------------------------------------------------------------------------
+ALGEMEEN:
+
+  # Sonarcloud stuff
+  cfg_Ok2RunSonarCloud: "false"
+
+  # WhiteSource stuff
+  cfg_Ok2RunWhiteSource: "false"
+#
+# ===================================================================================================
+
+  # ..................................................
+  # iOS Settings over alle branches heen
+  # ..................................................
+  cfgiOS_Ok2Build               : "true"                
+  # Build configuratie variabelen
+  cfgiOS_BuildMonoVersion       : "latest"     
+  cfgiOS_BuildXcodeVersion      : "latest"   
+  cfgiOS_BuildArgs              : ""
+  # Bundle ID postfix voor Servcie Extensions
+  cfgiOS_AppName                : "DigiD"
+  cfgiOS_BuildProjectFile       : "Source/DigiD.iOS/DigiD.iOS.csproj"   
+  cfgiOS_BuildInfoPlistPath     : "Source/DigiD.iOS/Info.plist"
+  # AppCenter configuratie instellingen
+  cfgiOS_AppCenterOk2Push       : "true"
+  cfgiOS_AppCenterAppSlug       : "Belastingdienst/Logius-Mobile-DigiD-iOS"
+
+  # ..................................................
+  # Android settings over alle branches heen
+  # ..................................................
+  cfgDroid_Ok2Build             : "true" 
+  # Build configuratie variabelen
+  cfgDroid_BuildMonoVersion     : "latest"
+  cfgDroid_BuildArgs            : ""
+  cfgDroid_AppName              : "DigiD"  
+  cfgDroid_BuildProjectFile     : "Source/DigiD.Droid/DigiD.Droid.csproj"
+  cfgDroid_BuildKeystore        : "DigiD.keystore"
+  cfgDroid_BuildApksignerScheme : "v2"
+  cfgDroid_BuildManifestPath    : "Source/DigiD.Droid/Properties/AndroidManifest.xml"
+  # AppCenter configuratie instellingen
+  cfgDroid_AppCenterOk2Push     : "true"
+  cfgDroid_AppCenterAppSlug     : "Belastingdienst/Logius-Mobile-Android"
+ 
+
+# ===================================================================================================
+#
+# Branch: main
+#
+# ---------------------------------------------------------------------------------------------------
+main:
+    # ..................................................
+    # iOS
+    # ..................................................
+    # Build configuratie variabelen
+    cfgiOS_BuildTarget            : "Develop"         
+    # App configuratie variabelen
+    cfgiOS_AppBundleID            : "SSSSSSSSSSSSSSSSSSSSSSSSSS"
+    cfgiOS_AppIcon                : "Resources/Images.xcassets/AppIcons_DEV.appiconset"
+    # AppCenter configuratie instellingen
+    cfgiOS_AppCenterDistGroupID   : "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" # DIG - Developers
+
+    # ..................................................
+    # Android
+    # ..................................................
+    # Build configuratie variabelen
+    cfgDroid_BuildTarget            : "Develop"         
+    # App configuratie variabelen
+    cfgDroid_AppBundleID            : "SSSSSSSSSSSSSSSSSSSSSSSSSS"
+    cfgDroid_AppIcon                : "@mipmap/ic_launcher_DEV"
+    # AppCenter configuratie instellingen
+    cfgDroid_AppCenterDistGroupID   : "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" # DIG - Developers
+    
+ # ===================================================================================================
+#
+# Branch: TST
+#
+# ---------------------------------------------------------------------------------------------------
+TST:
+    # ..................................................
+    # iOS
+    # ..................................................
+    # Build configuratie variabelen
+    cfgiOS_BuildTarget            : "Test"         
+    # App configuratie variabelen
+    cfgiOS_AppBundleID            : "SSSSSSSSSSSSSSSSSSSSSSSSSS"
+    cfgiOS_AppIcon                : "Resources/Images.xcassets/AppIcons_TST.appiconset"
+    # AppCenter configuratie instellingen
+    cfgiOS_AppCenterDistGroupID   : "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" # DIG - FastLane
+
+    # ..................................................
+    # Android
+    # ..................................................
+    # Build configuratie variabelen
+    cfgDroid_BuildTarget            : "Test"         
+    # App configuratie variabelen
+    cfgDroid_AppBundleID            : "SSSSSSSSSSSSSSSSSSSSSSSSSS"
+    cfgDroid_AppIcon                : "@mipmap/ic_launcher_tst"
+    # AppCenter configuratie instellingen
+    cfgDroid_AppCenterDistGroupID   : "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" # DIG - FastLane
+   
+# ===================================================================================================
+#
+# Branch: ACC
+#
+# ---------------------------------------------------------------------------------------------------
+ACC:
+    # ..................................................
+    # iOS
+    # ..................................................
+    # Build configuratie variabelen
+    cfgiOS_BuildTarget            : "Acceptance"         
+    # App configuratie variabelen
+    cfgiOS_AppBundleID            : "SSSSSSSSSSSSSSSSSSSSSSSSSS"
+    cfgiOS_AppIcon                : "Resources/Images.xcassets/AppIcons_ACC.appiconset"
+    # AppCenter configuratie instellingen
+    cfgiOS_AppCenterDistGroupID   : "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" # DIG - FastLane, DIG - Acceptatie, MijnOverheid
+
+    # ..................................................
+    # Android
+    # ..................................................
+    # Build configuratie variabelen
+    cfgDroid_BuildTarget            : "Acceptance"         
+    # App configuratie variabelen
+    cfgDroid_AppBundleID            : "SSSSSSSSSSSSSSSSSSSSSSSSSS"
+    cfgDroid_AppIcon                :  "@mipmap/ic_launcher_acc"
+    # AppCenter configuratie instellingen
+    cfgDroid_AppCenterDistGroupID   : "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" # DIG - FastLane, DIG - Acceptatie, MijnOverheid
+
+# ===================================================================================================
+
+# ===================================================================================================
+#
+# Branch: PP (Preprod)  
+#
+# ---------------------------------------------------------------------------------------------------
+PP:
+    # ..................................................
+    # iOS
+    # ..................................................
+    # Build configuratie variabelen
+    cfgiOS_BuildTarget            : "PreProd"
+    cfgiOS_AppBundleID            : "SSSSSSSSSSSSSSSSSSSSSSSSS" 
+    cfgiOS_AppIcon                : "Resources/Images.xcassets/AppIcons_PP.appiconset"
+    # AppCenter configuratie instellingen
+    cfgiOS_AppCenterAppSlug       : "Belastingdienst/Logius-DIG-Mobile-PP-iOS"
+    cfgiOS_AppCenterDistGroupID   : "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" # DIG-PP-PRD-CICD
+                                    # "" # DIG Productiion of naar `store
+
+    # ..................................................
+    # Android
+    # ..................................................
+    # Build configuratie variabelen
+    cfgDroid_BuildTarget            : "PreProd"
+    # App configuratie variabelen
+    cfgDroid_BuildKeystore          : "digidpppublish.keystore"
+    cfgDroid_AppBundleID            : "SSSSSSSSSSSSSSSSSSSSSSSSS" 
+    cfgDroid_AppIcon                : "@mipmap/ic_launcher_pp"
+    # AppCenter configuratie instellingen
+    cfgDroid_AppCenterAppSlug       : "Belastingdienst/Logius-DIG-Mobile-PP-Android"
+    cfgDroid_AppCenterDistGroupID   : "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" # DIG-PP-CICD
+    
+#
+# ===================================================================================================
+#
+# Branch: PROD   
+#
+# ---------------------------------------------------------------------------------------------------
+PROD:
+    # ..................................................
+    # iOS
+    # ..................................................
+    # Build configuratie variabelen
+    cfgiOS_BuildTarget            : "Production" 
+    cfgiOS_AppBundleID            : "SSSSSSSSSSSSSSSSSSSSSSSSSS" 
+    cfgiOS_AppIcon                : "Resources/Images.xcassets/AppIcons_PROD.appiconset"
+    # AppCenter configuratie instellingen
+    cfgiOS_AppCenterDistGroupID   : "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" # DIG-PRD-CICD
+                                    #SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+    # ..................................................
+    # Android
+    # ..................................................
+    # Build configuratie variabelen
+    cfgDroid_BuildTarget            : "Production"
+    # App configuratie variabelen
+    cfgDroid_BuildKeystore          : "DigiD_pub.keystore"
+    cfgDroid_AppBundleID            : "SSSSSSSSSSSSSSSSSSSSSSSSSS" 
+    cfgDroid_AppIcon                : "@mipmap/ic_launcher"
+    # AppCenter configuratie instellingen
+    cfgDroid_AppCenterDistGroupID   : "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" # DIG-PRD-CICD
+#
+# ===================================================================================================

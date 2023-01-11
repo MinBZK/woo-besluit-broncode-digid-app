@@ -1,0 +1,975 @@
+<!-- Deze broncode is openbaar gemaakt vanwege een Woo-verzoek zodat deze  -->
+<!-- gericht is op transparantie en niet op hergebruik. Hergebruik van  -->
+<!-- de broncode is toegestaan onder de EUPL licentie, met uitzondering  -->
+<!-- van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit Woo-besluit kunt u mailen met open@logius.nl -->
+<!-- -->
+<!-- This code has been disclosed in response to a request under the Dutch -->
+<!-- Open Government Act ("Wet open Overheid"). This implies that publication  -->
+<!-- is primarily driven by the need for transparence, not re-use. -->
+<!-- Re-use is permitted under the EUPL-license, with the exception  -->
+<!-- of source files that contain a different license. -->
+<!-- -->
+<!-- The archive that this file originates from can be found at: -->
+<!--   https://github.com/MinBZK/woo-besluit-broncode-digid-app -->
+<!-- -->
+<!-- Security vulnerabilities may be responsibly disclosed via the Dutch NCSC: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- using the reference "Logius, publicly disclosed source code DigiD-App"  -->
+<!-- -->
+<!-- Other questions regarding this Open Goverment Act decision may be -->
+<!-- directed via email to open@logius.nl -->
+<!-- -->
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{B1287E4D-C3C7-41C0-A34F-9684817ECB8B}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{edc1b0fa-90cd-4038-8fad-98fe74adb368}</TemplateGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>DigiD.iOS</RootNamespace>
+    <AssemblyName>DigiD.iOS</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <ProvisioningType>automatic</ProvisioningType>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignEntitlements>Entitlements_simulator.plist</CodesignEntitlements>
+    <CodesignKey>PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP</CodesignKey>
+    <CodesignProvision>VS: nl.rijksoverheid.digid.dev Development</CodesignProvision>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEBUG;TESTCLOUD</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements_development.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchInterpreter>-all</MtouchInterpreter>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchLink>None</MtouchLink>
+    <MtouchFastDev>true</MtouchFastDev>
+    <LangVersion>default</LangVersion>
+    <CodesignProvision>MCC DEV DigiD Development</CodesignProvision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|iPhoneSimulator'">
+    <OutputPath>bin\iPhoneSimulator\Test\</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|iPhone'">
+    <OutputPath>bin\iPhone\Test\</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;TEST</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchExtraArgs>-gcc_flags "-fobjc-arc"</MtouchExtraArgs>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Develop|iPhoneSimulator'">
+    <OutputPath>bin\iPhoneSimulator\Develop\</OutputPath>
+    <CodesignEntitlements>Entitlements_simulator.plist</CodesignEntitlements>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Develop|iPhone'">
+    <OutputPath>bin\iPhone\Develop\</OutputPath>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEV</DefineConstants>
+    <MtouchExtraArgs>-gcc_flags "-fobjc-arc"</MtouchExtraArgs>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Acceptance|iPhoneSimulator'">
+    <OutputPath>bin\iPhoneSimulator\Acceptance\</OutputPath>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Acceptance|iPhone'">
+    <OutputPath>bin\iPhone\Acceptance\</OutputPath>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;ACC</DefineConstants>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchExtraArgs>-gcc_flags "-fobjc-arc"</MtouchExtraArgs>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production|iPhoneSimulator'">
+    <OutputPath>bin\iPhoneSimulator\Production\</OutputPath>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production|iPhone'">
+    <OutputPath>bin\iPhone\Production\</OutputPath>
+    <CodesignEntitlements>Entitlements-prod.plist</CodesignEntitlements>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;PROD</DefineConstants>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchExtraArgs>-gcc_flags "-fobjc-arc"</MtouchExtraArgs>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PreProd|iPhoneSimulator' ">
+    <OutputPath>bin\iPhoneSimulator\PreProd\</OutputPath>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PreProd|iPhone' ">
+    <OutputPath>bin\iPhone\PreProd\</OutputPath>
+    <CodesignEntitlements>Entitlements-preprod.plist</CodesignEntitlements>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchExtraArgs>-gcc_flags "-fobjc-arc"</MtouchExtraArgs>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;PREPROD</DefineConstants>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <Commandlineparameters>
+    </Commandlineparameters>
+    <CrashReportingApiKey>
+    </CrashReportingApiKey>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Acceptance-SecurityTest|iPhoneSimulator'">
+    <OutputPath>bin\iPhoneSimulator\Acceptance\</OutputPath>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <CodesignProvision>
+    </CodesignProvision>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Acceptance-SecurityTest|iPhone'">
+    <OutputPath>bin\iPhone\Acceptance-SecurtityTest\</OutputPath>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchExtraArgs>-gcc_flags "-fobjc-arc"</MtouchExtraArgs>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;ACC</DefineConstants>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestCloud|iPhoneSimulator'">
+    <OutputPath>bin\iPhoneSimulator\TestCloud\</OutputPath>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestCloud|iPhone'">
+    <OutputPath>bin\iPhone\TestCloud\</OutputPath>
+    <CodesignEntitlements>Entitlements-prod.plist</CodesignEntitlements>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchExtraArgs>-gcc_flags "-fobjc-arc"</MtouchExtraArgs>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar.IOS">
+      <Version>20.2.0.45</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+    <PackageReference Include="Xamarin.Forms">
+      <Version>5.0.0.2515</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.TestCloud.Agent">
+      <Version>0.23.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.CommunityToolkit">
+      <Version>2.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="SkiaSharp.Svg">
+      <Version>1.60.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Entitlements-preprod.plist" />
+    <None Include="Entitlements-prod.plist" />
+    <None Include="Entitlements_development.plist" />
+    <None Include="Entitlements_simulator.plist" />
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
+    <BundleResource Include="Resources\animatie_idbewijs_documenten_uitleg_eng.json" />
+    <BundleResource Include="Resources\animatie_idbewijs_documenten_uitleg_nl.json" />
+    <BundleResource Include="Resources\animatie_verschuif_document_smartphone_uit_hoes_eng.json" />
+    <BundleResource Include="Resources\animatie_verschuif_document_smartphone_uit_hoes_nl.json" />
+    <BundleResource Include="Resources\digid_animatie_overlay_loading.json" />
+    <BundleResource Include="Resources\digid_animatie_overlay_success.json" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <BundleResource Include="Resources\animatie_CAN_code_uitleg_IDkaart.json" />
+    <BundleResource Include="Resources\animatie_CAN_code_uitleg_rijbewijs.json" />
+    <BundleResource Include="Resources\pinbutton_0_dark%402x.png" />
+    <BundleResource Include="Resources\pinbutton_0_dark%403x.png" />
+    <BundleResource Include="Resources\pinbutton_0%402x.png" />
+    <BundleResource Include="Resources\pinbutton_0%403x.png" />
+    <BundleResource Include="Resources\pinbutton_1_dark%402x.png" />
+    <BundleResource Include="Resources\pinbutton_1_dark%403x.png" />
+    <BundleResource Include="Resources\pinbutton_1%402x.png" />
+    <BundleResource Include="Resources\pinbutton_1%403x.png" />
+    <BundleResource Include="Resources\pinbutton_2_dark%402x.png" />
+    <BundleResource Include="Resources\pinbutton_2_dark%403x.png" />
+    <BundleResource Include="Resources\pinbutton_2%402x.png" />
+    <BundleResource Include="Resources\pinbutton_2%403x.png" />
+    <BundleResource Include="Resources\pinbutton_3_dark%402x.png" />
+    <BundleResource Include="Resources\pinbutton_3_dark%403x.png" />
+    <BundleResource Include="Resources\pinbutton_3%402x.png" />
+    <BundleResource Include="Resources\pinbutton_3%403x.png" />
+    <BundleResource Include="Resources\pinbutton_4_dark%402x.png" />
+    <BundleResource Include="Resources\pinbutton_4_dark%403x.png" />
+    <BundleResource Include="Resources\pinbutton_4%402x.png" />
+    <BundleResource Include="Resources\pinbutton_4%403x.png" />
+    <BundleResource Include="Resources\pinbutton_5_dark%402x.png" />
+    <BundleResource Include="Resources\pinbutton_5_dark%403x.png" />
+    <BundleResource Include="Resources\pinbutton_5%402x.png" />
+    <BundleResource Include="Resources\pinbutton_5%403x.png" />
+    <BundleResource Include="Resources\pinbutton_6_dark%402x.png" />
+    <BundleResource Include="Resources\pinbutton_6_dark%403x.png" />
+    <BundleResource Include="Resources\pinbutton_6%402x.png" />
+    <BundleResource Include="Resources\pinbutton_6%403x.png" />
+    <BundleResource Include="Resources\pinbutton_7_dark%402x.png" />
+    <BundleResource Include="Resources\pinbutton_7_dark%403x.png" />
+    <BundleResource Include="Resources\pinbutton_7%402x.png" />
+    <BundleResource Include="Resources\pinbutton_7%403x.png" />
+    <BundleResource Include="Resources\pinbutton_8_dark%402x.png" />
+    <BundleResource Include="Resources\pinbutton_8_dark%403x.png" />
+    <BundleResource Include="Resources\pinbutton_8%402x.png" />
+    <BundleResource Include="Resources\pinbutton_8%403x.png" />
+    <BundleResource Include="Resources\pinbutton_9_dark%402x.png" />
+    <BundleResource Include="Resources\pinbutton_9_dark%403x.png" />
+    <BundleResource Include="Resources\pinbutton_9%402x.png" />
+    <BundleResource Include="Resources\pinbutton_9%403x.png" />
+    <BundleResource Include="Resources\pinbutton_backspace_dark%402x.png" />
+    <BundleResource Include="Resources\pinbutton_backspace_dark%403x.png" />
+    <BundleResource Include="Resources\pinbutton_backspace%402x.png" />
+    <BundleResource Include="Resources\pinbutton_backspace%403x.png" />
+    <BundleResource Include="Resources\foto_uitleg_over_inloggen%402x.png" />
+    <BundleResource Include="Resources\foto_uitleg_over_inloggen%403x.png" />
+    <BundleResource Include="Resources\animatie_app_start_met_pincode.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomRenderers\AccessibilityContentViewRenderer.cs" />
+    <Compile Include="CustomRenderers\BlurViewRenderer.cs" />
+    <Compile Include="CustomRenderers\CustomBaseContentPageRenderer.cs" />
+    <Compile Include="CustomRenderers\CustomButtonRenderer.cs" />
+    <Compile Include="CustomRenderers\CustomEntryRenderer.cs" />
+    <Compile Include="CustomRenderers\CustomNavigationRenderer.cs" />
+    <Compile Include="CustomRenderers\CustomPinButtonRenderer.cs" />
+    <Compile Include="CustomRenderers\CustomScrollViewRenderer.cs" />
+    <Compile Include="CustomRenderers\GridPinTilesRenderer.cs" />
+    <Compile Include="CustomRenderers\QRScannerViewRenderer.cs" />
+    <Compile Include="Effects\A11yEffect.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Helpers\DictionaryHelper.cs" />
+    <Compile Include="Helpers\ReaderSession.cs" />
+    <Compile Include="Helpers\SecureEnclaveHelper.cs" />
+    <Compile Include="Helpers\SecurityStrings.cs" />
+    <Compile Include="Helpers\UserNotificationCenterDelegate.cs" />
+    <Compile Include="Helpers\VideoDataOutputDelegate.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Services\A11YService.cs" />
+    <Compile Include="Services\DeviceService.cs" />
+    <Compile Include="Services\Dialog.cs" />
+    <Compile Include="Services\ExceptionService.cs" />
+    <Compile Include="Services\HttpMessageHandlerService.cs" />
+    <Compile Include="Services\LocalNotificationsService.cs" />
+    <Compile Include="Services\NFCService.cs" />
+    <Compile Include="Services\PushNotificationService.cs" />
+    <Compile Include="Services\SecureStorage.cs" />
+    <Compile Include="Services\SecurityService.cs" />
+    <Compile Include="Services\SigningService.cs" />
+    <Compile Include="Views\CustomPinButton.cs" />
+    <Compile Include="Views\QRCodeDetectionView.cs" />
+    <Compile Include="CustomRenderers\CustomLabelRenderer.cs" />
+    <Compile Include="CustomRenderers\TransparentModalPageBackgroundRenderer.cs" />
+    <Compile Include="CustomRenderers\CustomHtmlLabelRenderer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DIG-Common\Source\DigiD.Common.Http\DigiD.Common.Http.csproj">
+      <Project>{C66B7C90-B49E-45DF-9B0F-5B3E44EA38D3}</Project>
+      <Name>DigiD.Common.Http</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DIG-Common\Source\DigiD.Common.Mobile\DigiD.Common.Mobile.csproj">
+      <Project>{8F23DCFA-CE34-4E81-8173-D0BDD9BF221E}</Project>
+      <Name>DigiD.Common.Mobile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DIG-Common\Source\DigiD.Common.NFC\DigiD.Common.NFC.csproj">
+      <Project>{25365BD2-FB34-4A9A-A70C-0A8DC4AD6F33}</Project>
+      <Name>DigiD.Common.NFC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DIG-Common\Source\DigiD.Common.RDA\DigiD.Common.RDA.csproj">
+      <Project>{9f6ccd47-1fe8-4f04-a4a8-9402209a9817}</Project>
+      <Name>DigiD.Common.RDA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DIG-Common\Source\DigiD.Common\DigiD.Common.csproj">
+      <Project>{a4a65c48-7e51-466a-a0e2-5ecf9e41b861}</Project>
+      <Name>DigiD.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DigiD.Core.MobileClient\DigiD.Core.MobileClient.csproj">
+      <Project>{49BF5569-0DD1-44C0-A0AA-843604FDEDB7}</Project>
+      <Name>DigiD.Core.MobileClient</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\digid_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\digid_logo%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\digid_logo%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_sluiten.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_sluiten%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_sluiten%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_sluiten_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_sluiten_dark%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_sluiten_dark%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_vraagteken%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_vraagteken%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_vraagteken_dark%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_vraagteken_dark%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_wachtwoord_default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_wachtwoord_default%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_wachtwoord_default%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_wachtwoord_default_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_wachtwoord_default_dark%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_wachtwoord_default_dark%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_wachtwoord_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_wachtwoord_on%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_wachtwoord_on%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pincode_invoer_active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pincode_invoer_active%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pincode_invoer_active%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pincode_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pincode_off%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pincode_off%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pincode_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pincode_on%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pincode_on%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\splash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\splash%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\splash%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\vaantje.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\vaantje%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\vaantje%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-1024%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-20x20%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-29x29%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-29x29%402x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-29x29%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-29x29%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-40x40%401x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-40x40%401x-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-40x40%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-40x40%402x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-40x40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-60x60%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-60x60%402x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-60x60%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-60x60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-76x76%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-76x76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_ACC.appiconset\AppIcon-83.5x83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-1024%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-20x20%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-29x29%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-29x29%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-40x40%401x-1-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-40x40%401x-1-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-40x40%401x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-40x40%402x-1-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-40x40%402x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-58x58%401x-1-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-58x58%401x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-60x60%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-60x60%402x-1-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-60x60%402x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-60x60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-76x76%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-76x76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_DEV.appiconset\AppIcon-83.5x83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-1024%401x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-20x20%401x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-29x29%401x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-29x29%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-29x29%402x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-29x29%403x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-40x40%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-40x40%401x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-40x40%401x2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-40x40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-40x40%402x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-60x60%401x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-60x60%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-60x60%402x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-60x60%403x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-76x76%401x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-76x76%402x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PP.appiconset\AppIcon-83.5x83.5%402x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\180x180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\80x80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-167.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-20.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-60%40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-72.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-72%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-Small-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-Small-40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-Small-40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-Small-50.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-Small-50%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-Small.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-Small%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon-Small%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\Icon%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\iTunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_PROD.appiconset\iTunesArtwork%402x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-1024%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-20x20%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-29x29%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-29x29%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-40x40%401x-1-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-40x40%401x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-40x40%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-40x40%402x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-40x40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-58x58%401x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-58x58%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-60x60%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-60x60%402x-1-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-60x60%402x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-60x60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-76x76%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-76x76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons_TST.appiconset\AppIcon-83.5x83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\vid_koppelcode.mp4" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\vid_qrcode.mp4" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\vid_rda.mp4" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>

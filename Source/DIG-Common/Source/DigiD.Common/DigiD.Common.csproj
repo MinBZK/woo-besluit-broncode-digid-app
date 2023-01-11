@@ -1,0 +1,381 @@
+<!-- De openbaarmaking van dit bestand is in het kader van de WOO geschied en  -->
+<!-- dus gericht op transparantie en niet op hergebruik. In het geval dat dit  -->
+<!-- bestand hergebruikt wordt, is de EUPL licentie van toepassing, met  -->
+<!-- uitzondering van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-verzoek-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit WOO-verzoek kunt u mailen met: -->
+<!--   mailto://open@logius.nl -->
+<!-- -->
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Configurations>Debug;Production;Acceptance;Acceptance-SecurityTest;Test;Develop;PreProd;TestCloud</Configurations>
+		<NeutralLanguage>nl-NL</NeutralLanguage>
+		<Platforms>AnyCPU;iPhone</Platforms>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>full</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<DefineConstants>TRACE;DUMP_INFO;ENVIRONMENT_SELECTABLE;NO_READ_PHOTO;DEBUG;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+		<CodeAnalysisRuleSet></CodeAnalysisRuleSet>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Production|AnyCPU' or '$(Configuration)|$(Platform)'=='Production|iPhone'">
+		<DebugType></DebugType>
+		<Optimize>true</Optimize>
+		<DefineConstants>TRACE;PROD;PRODUCTION;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+		<TreatWarningsAsErrors></TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Acceptance|AnyCPU' or '$(Configuration)|$(Platform)'=='Acceptance|iPhone'">
+		<DebugType></DebugType>
+		<Optimize>true</Optimize>
+		<DefineConstants>TRACE;ENVIRONMENT_SELECTABLE;ACC;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+		<TreatWarningsAsErrors></TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Acceptance-SecurityTest|AnyCPU' or '$(Configuration)|$(Platform)'=='Acceptance-SecurityTest|iPhone'">
+		<DebugType></DebugType>
+		<Optimize>true</Optimize>
+		<DefineConstants>TRACE;ENVIRONMENT_SELECTABLE;ACC;NETSTANDARD;NETSTANDARD2_0;SSL_UNPINNING</DefineConstants>
+		<TreatWarningsAsErrors></TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='PreProd|AnyCPU' or '$(Configuration)|$(Platform)'=='PreProd|iPhone'">
+		<DebugType></DebugType>
+		<Optimize>true</Optimize>
+		<DefineConstants>TRACE;PREPROD;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU' or '$(Configuration)|$(Platform)' == 'Test|iPhone'">
+		<DebugType></DebugType>
+		<Optimize>true</Optimize>
+		<DefineConstants>TEST;NETSTANDARD;NETSTANDARD2_0;ENVIRONMENT_SELECTABLE</DefineConstants>
+		<NoWarn></NoWarn>
+		<NoStdLib>false</NoStdLib>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Develop|AnyCPU' or '$(Configuration)|$(Platform)'=='Develop|iPhone'">
+		<DebugType />
+		<Optimize>true</Optimize>
+		<DefineConstants>DEV;NETSTANDARD;NETSTANDARD2_0;ENVIRONMENT_SELECTABLE</DefineConstants>
+		<NoWarn />
+		<NoStdLib>false</NoStdLib>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Production|AnyCPU' ">
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Acceptance|AnyCPU' or '$(Configuration)|$(Platform)'=='Acceptance|iPhone'">
+		<DefineConstants>TRACE;ENVIRONMENT_SELECTABLE;ACC;ACCEPTANCE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Acceptance|iPhone' ">
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Acceptance-SecurityTest|iPhone'">
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Acceptance-SecurityTest|AnyCPU' ">
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestCloud|AnyCPU' or '$(Configuration)|$(Platform)'=='TestCloud|iPhone'">
+		<DebugType />
+		<Optimize>true</Optimize>
+		<DefineConstants>DEV;NETSTANDARD;NETSTANDARD2_0;ENVIRONMENT_SELECTABLE</DefineConstants>
+		<NoWarn />
+		<NoStdLib>false</NoStdLib>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Production|iPhone' ">
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|iPhone' ">
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Develop|AnyCPU' ">
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Develop|iPhone' ">
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PreProd|AnyCPU' ">
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PreProd|iPhone' ">
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TestCloud|AnyCPU' ">
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TestCloud|iPhone' ">
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Acceptance|AnyCPU' ">
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="AppResources.nl.Designer.cs" />
+		<Compile Remove="Controls\BorderedButtonSVG.xaml.cs" />
+		<Compile Remove="Controls\CustomAnimationView.cs" />
+		<Compile Remove="Helpers\DataResourceHelper.cs" />
+		<Compile Remove="Helpers\PinEntry.cs" />
+		<Compile Remove="Helpers\PlatformCulture.cs" />
+		<Compile Remove="Models\RequestModels\StartSessionRequestModel.cs" />
+		<Compile Remove="Services\ILocalize.cs" />
+		<None Remove="Resources\digid_afbeelding_geen_verbinding_met_internet.svg" />
+		<None Remove="Resources\digid_icon_menu_toegankelijkheid.svg" />
+		<None Remove="Resources\digid_icon_menu_toegankelijkheid_dark.svg" />
+		<None Remove="Resources\digid_icon_opensource_libraries.svg" />
+		<None Remove="Resources\digid_icon_opensource_libraries_dark.svg" />
+		<None Remove="Resources\afbeelding_icon_success_generic.svg" />
+		<None Remove="Resources\icon_instellingen_statistieken_dark.svg" />
+		<Compile Remove="Controls\SpannableString.cs" />
+		<None Remove="Resources\digid_afbeelding_update_niet_verplicht.svg" />
+		<None Remove="Resources\digid_afbeelding_update_verplicht.svg" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="Resources\afbeelding_aanzetten_nfc.svg" />
+		<None Remove="Resources\afbeelding_digid_officiele_app.svg" />
+		<None Remove="Resources\afbeelding_document_activeren.svg" />
+		<None Remove="Resources\afbeelding_document_vernieuwen.svg" />
+		<None Remove="Resources\afbeelding_icon_fail.svg" />
+		<None Remove="Resources\afbeelding_icon_failed.svg" />
+		<None Remove="Resources\afbeelding_icon_success.svg" />
+		<None Remove="Resources\afbeelding_nfc_aanzetten.svg" />
+		<None Remove="Resources\afbeelding_pincode_wijzigen.svg" />
+		<None Remove="Resources\afbeelding_read_document.svg" />
+		<None Remove="Resources\digid_afbeelding_icon_geannuleerd.svg" />
+		<None Remove="Resources\digid_afbeelding_pincode_wijzigen.svg" />
+		<None Remove="Resources\icon_button_1.svg" />
+		<None Remove="Resources\icon_button_center.svg" />
+		<None Remove="Resources\icon_button_left.svg" />
+		<None Remove="Resources\icon_button_right.svg" />
+		<None Remove="Resources\icon_chevron_grijs.svg" />
+		<None Remove="Resources\icon_chevron_wit.svg" />
+		<None Remove="Resources\icon_foutmelding.svg" />
+		<None Remove="Resources\icon_foutmelding_kritiek.svg" />
+		<None Remove="Resources\icon_foutmelding_normaal.svg" />
+		<None Remove="Resources\icon_instellingen_taal_vink.svg" />
+		<None Remove="Resources\icon_PEN_code_dash_streep.svg" />
+		<None Remove="Resources\icon_pincode_invoer_active.svg" />
+		<None Remove="Resources\icon_pincode_off.svg" />
+		<None Remove="Resources\icon_pincode_on.svg" />
+		<None Remove="Resources\icon_pinster.svg" />
+		<None Remove="Resources\icon_pinster_puk.svg" />
+		<None Remove="Resources\icon_radiobutton_selected.svg" />
+		<None Remove="Resources\icon_radiobutton_unselected.svg" />
+		<None Remove="Resources\icon_sluiten.svg" />
+		<None Remove="Resources\icon_sluiten_dark.svg" />
+		<None Remove="Resources\icon_taal_selectie.svg" />
+		<None Remove="Resources\icon_taal_selectie_dark.svg" />
+		<None Remove="Resources\icon_terug.svg" />
+		<None Remove="Resources\icon_terug_dark.svg" />
+		<None Remove="Resources\icon_verder_blauw.svg" />
+		<None Remove="Resources\icon_verder_inactief.svg" />
+		<None Remove="Resources\icon_verder_inactief_dark.svg" />
+		<None Remove="Resources\icon_verder_oranje.svg" />
+		<None Remove="Resources\icon_verder_wit.svg" />
+		<None Remove="Resources\icon_verder_wit_dark.svg" />
+		<None Remove="Resources\icon_vraagteken.svg" />
+		<None Remove="Resources\icon_vraagteken_dark.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\afbeelding_aanzetten_nfc.svg" />
+		<EmbeddedResource Include="Resources\afbeelding_digid_officiele_app.svg" />
+		<EmbeddedResource Include="Resources\afbeelding_document_activeren.svg" />
+		<EmbeddedResource Include="Resources\afbeelding_document_vernieuwen.svg" />
+		<EmbeddedResource Include="Resources\afbeelding_icon_failed.svg" />
+		<EmbeddedResource Include="Resources\afbeelding_icon_success.svg" />
+		<EmbeddedResource Include="Resources\afbeelding_read_document.svg" />
+		<EmbeddedResource Include="Resources\digid_afbeelding_geen_verbinding_met_internet.svg" />
+		<EmbeddedResource Include="Resources\digid_afbeelding_icon_geannuleerd.svg" />
+		<EmbeddedResource Include="Resources\digid_afbeelding_pincode_wijzigen.svg" />
+		<EmbeddedResource Include="Resources\digid_afbeelding_update_niet_verplicht.svg" />
+		<EmbeddedResource Include="Resources\digid_afbeelding_update_verplicht.svg" />
+		<EmbeddedResource Include="Resources\digid_icon_menu_toegankelijkheid.svg" />
+		<EmbeddedResource Include="Resources\digid_icon_menu_toegankelijkheid_dark.svg" />
+		<EmbeddedResource Include="Resources\digid_icon_opensource_libraries.svg" />
+		<EmbeddedResource Include="Resources\digid_icon_opensource_libraries_dark.svg" />
+		<EmbeddedResource Include="Resources\icon_foutmelding_kritiek.svg" />
+		<EmbeddedResource Include="Resources\icon_sluiten_dark.svg" />
+		<EmbeddedResource Include="Resources\icon_taal_selectie_dark.svg" />
+		<EmbeddedResource Include="Resources\icon_instellingen_taal_vink.svg" />
+		<EmbeddedResource Include="Resources\icon_PEN_code_dash_streep.svg" />
+		<EmbeddedResource Include="Resources\icon_pinster.svg" />
+		<EmbeddedResource Include="Resources\icon_pinster_puk.svg" />
+		<EmbeddedResource Include="Resources\icon_sluiten.svg" />
+		<EmbeddedResource Include="Resources\icon_taal_selectie.svg" />
+		<EmbeddedResource Include="Resources\icon_terug_dark.svg" />
+		<EmbeddedResource Include="Resources\icon_verder_inactief.svg" />
+		<EmbeddedResource Include="Resources\icon_verder_inactief_dark.svg" />
+		<EmbeddedResource Include="Resources\icon_verder_oranje.svg" />
+		<EmbeddedResource Include="Resources\icon_verder_wit.svg" />
+		<EmbeddedResource Include="Resources\icon_verder_wit_dark.svg" />
+		<EmbeddedResource Include="Resources\icon_vraagteken_dark.svg" />
+		<EmbeddedResource Include="Resources\icon_vraagteken.svg" />
+		<EmbeddedResource Include="Resources\afbeelding_icon_success_generic.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Controls\VerificationCodeEntryView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Resources\button1.svg">
+			<LogicalName>DigiD.Common.Resources.button1.svg</LogicalName>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Fody" Version="6.6.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Plugin.StoreReview" Version="3.3.1" />
+		<PackageReference Include="PropertyChanged.Fody" Version="3.4.1" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.5.3" />
+		<PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.5.3" />
+		<PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.4" />
+		<PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
+		<PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
+		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
+		<PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="Controls\CustomEntry.cs" />
+		<Compile Remove="Converters\SurveyItemToImageSourceConverter.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Remove="AppResources.nl.resx" />
+		<EmbeddedResource Remove="Controls\BorderedButtonSVG.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\DigiD.Common.EID\DigiD.Common.EID.csproj" />
+		<ProjectReference Include="..\DigiD.Common.Http\DigiD.Common.Http.csproj" />
+		<ProjectReference Include="..\DigiD.Common.NFC\DigiD.Common.NFC.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Controls\HelpButtonView.xaml.cs">
+			<DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
+		<Compile Update="Controls\NumberPad.xaml.cs">
+			<DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
+		<Compile Update="Controls\NumberPadButton.xaml.cs">
+			<DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
+		<Compile Update="AccessabilityResources.Designer.cs">
+			<DependentUpon>AccessibilityResources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="AppResources.en.Designer.cs">
+			<DependentUpon>AppResources.en.resx</DependentUpon>
+		</Compile>
+		<Compile Update="MobileAppResources.Designer.cs">
+		  <DependentUpon>MobileAppResources.resx</DependentUpon>
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="AppResources.Designer.cs">
+		  <DependentUpon>AppResources.resx</DependentUpon>
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="MobileAppResources.en.Designer.cs">
+		  <DependentUpon>MobileAppResources.en.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="AppResources.en.resx">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>AppResources.en.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="AppResources.resx">
+			<LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Controls\AlertView.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Controls\BorderedButton.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="AccessabilityResources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>AccessabilityResources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Controls\CustomErrorLabel.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Controls\CustomRadioButton.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Controls\ExternalLinkLabel.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Controls\HelpButtonView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="MobileAppResources.en.resx">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		  <LastGenOutput>MobileAppResources.en.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="MobileAppResources.resx">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		  <LastGenOutput>MobileAppResources.Designer.cs</LastGenOutput>
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="Controls\BorderedButton.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Controls\NumberPad.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Controls\NumberPadButton.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+		<None Update="Controls\PiwikButtonDecorator.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Update="NETStandard.Library" Version="2.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EditorConfigFiles Update="D:\Projects\DigiD\DIG-Mobile\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+</Project>

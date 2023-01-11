@@ -1,0 +1,50 @@
+<!-- De openbaarmaking van dit bestand is in het kader van de WOO geschied en  -->
+<!-- dus gericht op transparantie en niet op hergebruik. In het geval dat dit  -->
+<!-- bestand hergebruikt wordt, is de EUPL licentie van toepassing, met  -->
+<!-- uitzondering van broncode waarvoor een andere licentie is aangegeven. -->
+<!-- -->
+<!-- Het archief waar dit bestand deel van uitmaakt is te vinden op: -->
+<!--   https://github.com/MinBZK/woo-verzoek-broncode-digid-app -->
+<!-- -->
+<!-- Eventuele kwetsbaarheden kunnen worden gemeld bij het NCSC via: -->
+<!--   https://www.ncsc.nl/contact/kwetsbaarheid-melden -->
+<!-- onder vermelding van "Logius, openbaar gemaakte broncode DigiD-App"  -->
+<!-- -->
+<!-- Voor overige vragen over dit WOO-verzoek kunt u mailen met: -->
+<!--   mailto://open@logius.nl -->
+<!-- -->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>netstandard2.0</TargetFramework>
+	  <Configurations>Debug;Acceptance-SecurityTest;Production;Acceptance;Develop;PreProd;Test;TestCloud</Configurations>
+	  <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Acceptance-SecurityTest|AnyCPU'" />
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Production|AnyCPU' " />
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Acceptance|AnyCPU' " />
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Develop|AnyCPU' ">
+		<DebugType></DebugType>
+		<DefineConstants>TRACE;DEVELOP;NETSTANDARD;NETSTANDARD2_1;DEV</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestCloud|AnyCPU'">
+		<DebugType />
+		<DefineConstants>TRACE;DEVELOP;NETSTANDARD;NETSTANDARD2_1;DEV</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PreProd|AnyCPU'" />
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' " />
+
+	<ItemGroup>
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DigiD.Common\DigiD.Common.csproj" />
+  </ItemGroup>
+
+</Project>
