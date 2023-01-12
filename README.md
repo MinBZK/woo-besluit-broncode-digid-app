@@ -1,6 +1,6 @@
 # Broncode DigiD app
 
-Op 15 januari 2023 heeft het ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK) een deelbesluit genomen op een Woo-verzoek over de broncode van de DigiD app voor mobiele devices. Dit besluit is voor iedereen openbaar en is op www.rijksoverheid.nl gepubliceerd. 
+Het ministerie van Binnenlandse Zaken en Koninkrijksrelaties (BZK) heeft een deelbesluit genomen op een Woo-verzoek over de broncode van de DigiD app voor mobiele devices. Dit besluit is voor iedereen openbaar en is op www.rijksoverheid.nl gepubliceerd. 
 
 De broncode is naar aanleiding van dit besluit op deze Github openbaar gemaakt, met uitzondering van informatie die valt onder de uitzonderingsgronden van artikel 5.1 van de Woo. Waar de uitzonderingsgronden zijn toegepast, staat dat gemarkeerd met de letters ‘S’ (security-risico) en ‘P’ (privacy-risico). 
 
